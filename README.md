@@ -4,8 +4,8 @@ A collection of games and interactive statistics about the Collatz conjecture.
 ## 1 Collatz conjecture
 ### 1.1 Ablauf
 Start with a random number n ∊ ℕ
-- If n odd → n becomes n / 2.
-- If n even → n becomes 3n + 1.
+- If n is odd → n becomes n / 2.
+- If n is even → n becomes 3n + 1.
 - Repeat
 
 ### 1.2 Examples
