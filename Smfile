@@ -3,3 +3,9 @@ test {
         %CC testexe src/*.c test/*.c
         !./testexe
 }
+
+wasm {
+        %SET CC emcc
+        %SET CFLAGS -s WASM=1
+        %CC collatz_steps.wasm src/wasm.c
+}
