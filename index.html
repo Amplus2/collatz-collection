@@ -7,8 +7,8 @@
     <title>collatz-collection</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-    
 </head>
+
 <body>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
     <header class="center-children"><h1>collatz-collection</h1></header>
@@ -16,8 +16,8 @@
         <h2> Collatz-Problem</h2>
         <h3>1.1 Ablauf</h3>
         <ul>
-            <li>Wenn <span class="tex">n</span> ungerade → <span class="tex">n</span> nimmt <span class="tex">\frac{n}{2}</span> an.</li>
-            <li>Wenn <span class="tex">n</span> gerade → <span class="tex">n</span> nimmt <span class="tex">3n + 1</span> an.</li>
+            <li>Wenn <span class="tex">n</span> ungerade <span class="tex">→ n</span> nimmt <span class="tex">\frac{n}{2}</span> an.</li>
+            <li>Wenn <span class="tex">n</span> gerade <span class="tex">→ n</span> nimmt <span class="tex">3n + 1</span> an.</li>
             <li>Vorgang wiederholen</li>
         </ul>
 
@@ -34,6 +34,7 @@
         <h2>1.5 Collatz-Schritte</h2>
         <p>Als Länge der Collatz-Folge wird die Anzahl der Schritte bezeichnet, die benötigt wird, um zum Wert <span class="tex">1</span> zu gelangen.</p>
     </div>
+
     <script>
         const texs = document.getElementsByClassName("tex");
         for(var i = 0; i < texs.length; i++) {
