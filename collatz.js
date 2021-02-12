@@ -20,22 +20,23 @@ async function collatz_steps(path, range) {
     const result = [];
     const exports = await get_wasm_exports(path);
     const collatz_steps = exports.collatz_steps;
-    for(var i = 0; i < range.length; i++) result.push(collatz_steps_c(range[i]));
+    console.log('starting...')
+    for(var i = 0; i < range.length; i++) result.push(collatz_steps(range[i]));
     return result;
 }
 
 async function collatz_steps_js(range) {
     function steps(input) {
-        input = BigInt(input);
         if (input < 1) return -1;
         var steps = 0;
         while (true) {
             if(input == 1) return steps;
-            input = input % 2n == 1n ? 3n * input + 1n : input / 2n;
+            input = input % 2 == 1 ? 3 * input + 1 : input / 2;
             steps++;
         }
     }
     const result = [];
+    console.log('starting...')
     for(var i = 0; i < range.length; i++) result.push(steps(range[i]));
     return result;
 }
