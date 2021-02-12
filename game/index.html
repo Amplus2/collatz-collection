@@ -9,5 +9,14 @@
 </head>
 <body>
     <div class="actual-body"></div>
+    <script>
+        fetch("../collatz_steps.wasm") 
+        .then(bytes => bytes.arrayBuffer()) 
+        .then(mod => WebAssembly.compile(mod)) 
+        .then(module => { 
+            const instance = new WebAssembly.Instance(module);
+            console.log(instance.exports.collatz_steps(5));
+        });
+    </script>
 </body>
 </html>
