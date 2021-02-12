@@ -1,0 +1,6 @@
+test {
+        %APPEND CFLAGS -Isrc
+        %CC testexe src/*.c test/*.c
+        !./testexe
+        !rm -f testexe
+}
