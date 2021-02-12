@@ -10,10 +10,9 @@
 <body>
     <div class="actual-body"></div>
     <script>
-        WebAssembly.instantiateStreaming(fetch("../collatz_steps.wasm"), importObject)
-        .then(module => {
-            const instance = new WebAssembly.Instance(module);
-            console.log(instance.exports.collatz_steps(5));
+        WebAssembly.instantiateStreaming(fetch("../collatz_steps.wasm"))
+        .then(obj => {
+            console.log(obj.instance.exports.collatz_steps(BigInt(9)));
         });
     </script>
 </body>
