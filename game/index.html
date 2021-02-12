@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,10 +10,8 @@
 <body>
     <div class="actual-body"></div>
     <script>
-        fetch("../collatz_steps.wasm") 
-        .then(bytes => bytes.arrayBuffer()) 
-        .then(mod => WebAssembly.compile(mod)) 
-        .then(module => { 
+        WebAssembly.instantiateStreaming(fetch("../collatz_steps.wasm"), importObject)
+        .then(module => {
             const instance = new WebAssembly.Instance(module);
             console.log(instance.exports.collatz_steps(5));
         });
