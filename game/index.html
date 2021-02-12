@@ -8,12 +8,18 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <div class="actual-body"></div>
+    <script src="../collatz.js"></script>
     <script>
-        WebAssembly.instantiateStreaming(fetch("../collatz_steps.wasm"))
-        .then(obj => {
-            console.log(obj.instance.exports.collatz_steps(BigInt(9)));
-        });
+        async function test() {
+            await collatz_steps("../collatz_steps.wasm", range(1, 10 ** 6));
+            console.log("finished!");
+        }
+        async function test_js() {
+            await collatz_steps_js(range(1, 10 ** 6));
+            console.log("finished!");
+        }
     </script>
+    <button onclick="test()">test</button>
+    <button onclick="test_js()">test js</button>
 </body>
 </html>
