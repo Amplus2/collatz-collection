@@ -1,6 +1,8 @@
 #include "collatz_steps.h"
-#include <stdio.h>
 
+#ifdef EMSCRIPTEN_KEEPALIVE
+EMSCRIPTEN_KEEPALIVE
+#endif
 uint_least64_t collatz_steps(uint_least64_t i) {
         uint_least64_t n;
         for(n = 0; i > 1; n++) {
