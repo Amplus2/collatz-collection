@@ -12,11 +12,11 @@
     <script>
         async function test() {
             await collatz_steps("../collatz_steps.wasm", range(1, 10 ** 6));
-            console.log("finished!");
+            console.log("finished with wasm", d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds());
         }
         async function test_js() {
             await collatz_steps_js(range(1, 10 ** 6));
-            console.log("finished!");
+            console.log("finished with js", d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds());
         }
     </script>
     <button onclick="test()">test</button>
