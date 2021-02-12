@@ -1,6 +1,6 @@
 test {
         %APPEND CFLAGS -Isrc
-        %CC testexe src/*.c test/*.c
+        %CC testexe src/collatz_steps.c test/*.c
         !./testexe
 }
 
