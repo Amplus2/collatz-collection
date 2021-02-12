@@ -10,15 +10,14 @@
 <body>
     <script src="../collatz.js"></script>
     <script>
+        const p = document.createElement('h2');
+        p.innerHTML = navigator.userAgent;
+        document.body.appendChild(p);
         async function test() {
             await collatz_steps("../collatz_steps.wasm", range(1, 10 ** 6));
-            var d = new Date();
-            console.log("finished with wasm", d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds());
         }
         async function test_js() {
             await collatz_steps_js(range(1, 10 ** 6));
-            var d = new Date();
-            console.log("finished with js", d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds());
         }
     </script>
     <button onclick="test()">test</button>
