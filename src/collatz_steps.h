@@ -1,3 +1,4 @@
 #pragma once
+#include <stdint.h>
 
-unsigned collatz_steps(unsigned);
+uint_least64_t collatz_steps(uint_least64_t);

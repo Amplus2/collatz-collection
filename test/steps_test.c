@@ -2,8 +2,8 @@
 #include <collatz_steps.h>
 
 typedef struct {
-        unsigned y;
-        unsigned x;
+        uint_least64_t y;
+        uint_least64_t x;
 } test_case;
 
 const test_case cases[] = {
@@ -79,14 +79,19 @@ const test_case cases[] = {
 #define len(a) sizeof(a) / sizeof(a[0])
 
 int main() {
-        for(unsigned i = 0; i < len(cases); i++) {
-                unsigned got = collatz_steps(cases[i].x);
+        int failed = 0;
+        for(uint_least64_t i = 0; i < len(cases); i++) {
+                uint_least64_t got = collatz_steps(cases[i].x);
                 if(got != cases[i].y) {
-                        printf("Failed test case: {x: %d, got: %d, want: %d}\n",
+                        printf("Failed test case: "
+                               "{x: %llu, got: %llu, want: %llu}\n",
                                cases[i].x, got, cases[i].y);
-                        return 1;
+                        failed++;
                 }
         }
-        puts("All tests passed.");
-        return 0;
+
+        if(failed) printf("%d/%lu tests failed.", failed, len(cases));
+        else puts("All tests passed.");
+
+        return failed;
 }
