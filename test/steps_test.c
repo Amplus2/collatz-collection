@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include <collatz_steps.h>
 
 typedef struct {
@@ -8,6 +9,7 @@ typedef struct {
 
 const test_case cases[] = {
         // http://www.ericr.nl/wondrous/delrecs.html
+        {1662, 80867137596217},
         {1000, 1412987847},
         {987, 1341234558},
         {986, 670617279},
@@ -80,6 +82,7 @@ const test_case cases[] = {
 
 int main() {
         int failed = 0;
+        clock_t start = clock();
         for(uint_least64_t i = 0; i < len(cases); i++) {
                 uint_least64_t got = collatz_steps(cases[i].x);
                 if(got != cases[i].y) {
@@ -89,9 +92,12 @@ int main() {
                         failed++;
                 }
         }
+        clock_t end = clock();
+        clock_t dt = end - start;
 
-        if(failed) printf("%d/%lu tests failed.", failed, len(cases));
-        else puts("All tests passed.");
+        if(failed) printf("%d/%lu tests failed.\n", failed, len(cases));
+        else       printf("All tests passed within %lu ticks. "
+                          "(approx %fms)\n", dt, dt * 1000.0F / CLOCKS_PER_SEC);
 
         return failed;
 }
