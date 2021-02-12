@@ -15,7 +15,7 @@ Start with a random number n ∊ ℕ
 
 ### 1.3 Conclusion
 Any number sequence of a starting number n ∊ ℕ (Collatz sequence)
-ends in the following scheme 4 → 2 → 1 → 4 → ... .
+ends in the following scheme 4 → 2 → 1 → 4 → ...
 
 ### 1.4 Problem
 1.3 has not been proven.
