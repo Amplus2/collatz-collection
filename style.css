@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Inter:500');
+@import url('https://fonts.googleapis.com/css?family=Inter:400');
 
 ::selection {
 	color: #000000;
 	background: #ffffff;
 }
 
-h1, h2, h3, h4, h5, h6, p, li, div {
+h1, h2, h3, h4, h5, h6, p, li, div, a {
     font-family: 'Inter', sans-serif;
     color: #e8e8e8;
 }
@@ -17,6 +17,15 @@ body {
 
 header {
     background-color: #212121;
+}
+
+header * {
+    transition-duration: 250ms;
+}
+
+header *:hover {
+    color: #838383;
+    font-size: 25pt;
 }
 
 .actual-body {
