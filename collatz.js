@@ -21,7 +21,7 @@ async function collatz_steps(path, range) {
     const exports = await get_wasm_exports(path);
     const collatz_steps = exports.collatz_steps;
     var d = new Date();
-    console.log('startingwith wasm ...', d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds())
+    console.log('starting with wasm ...', d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds())
     for(var i = 0; i < range.length; i++) result.push(collatz_steps(range[i]));
     return result;
 }
