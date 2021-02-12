@@ -22,4 +22,4 @@ ends in the following scheme 4 → 2 → 1 → 4 → ... .
 
 ## 2 Collatz-Steps
 The length of the Collatz sequence is the number of steps required
-to get to the value 1. .
+to get to the value 1.
