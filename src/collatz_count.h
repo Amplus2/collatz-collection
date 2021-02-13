@@ -1,4 +1,4 @@
 #pragma once
 
-double *collatz_count(double *range, double rangeLen, double countLen);
+double *collatz_count(double start, double end, double countLen);
 void collatz_free_count(double *);

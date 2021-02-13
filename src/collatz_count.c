@@ -6,11 +6,11 @@
 #ifdef EMSCRIPTEN_KEEPALIVE
 EMSCRIPTEN_KEEPALIVE
 #endif
-double *collatz_count(double *range, double rangeLen, double countLen) {
+double *collatz_count(double start, double end, double countLen) {
         double *count = malloc(countLen * sizeof(double));
         bzero(count, countLen * sizeof(double));
-        for(int i = 0; i < rangeLen; i++) {
-                count[(int)collatz_steps(range[i])] = range[i];
+        for(double i = start; i < end; i++) {
+                count[(int)collatz_steps(i)]++;
         }
         return count;
 }
