@@ -29,8 +29,8 @@ var ran_once = false;
 async function collatz_test(exports) {
     if (ran_once) return;
     ran_once = true;
-    const a = new Int32Array(exports.memory, 0, 100);
-    exports._Z19collatz_batch_stepsiiPi(1n, 100000n, a.byteOffset);
+    const a = new Int32Array(exports.memory);
+    exports._Z19collatz_batch_stepsiiPi(1n, 100n, a.byteOffset);
     console.log(a);
 }
 
