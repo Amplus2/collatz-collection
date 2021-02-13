@@ -41,7 +41,7 @@
         Chart.defaults.global.beginAtZero = true;
 
         async function update_chart1() {
-            const collatz_nums_steps = await collatz_amount_steps("../collatz_steps.wasm", range(1, last_chart1value));
+            const collatz_nums_steps = await collatz_amount_steps("../collatz.wasm", range(1, last_chart1value));
             if(chart1 !== undefined) chart1.destroy();
             chart1 = new Chart(document.getElementById("chart1"), {
                 type: "bar",
@@ -65,7 +65,7 @@
         async function update_chart2() {
             const scroll_offset = window.scrollY;
             const chart2range = range(1, last_chart2value);
-            const chart2steps = await collatz_steps("../collatz_steps.wasm", chart2range);
+            const chart2steps = await collatz_steps("../collatz.wasm", chart2range);
             if(chart2 !== undefined) chart2.destroy();
             chart2 = new Chart(document.getElementById("chart2"), {
                 type: "bar",
