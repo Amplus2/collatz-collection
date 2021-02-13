@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha256-t9UJPrESBeG2ojKTIcFLPGF7nHi2vEc7f5A2KpH/UBU=" crossorigin="anonymous"></script>
     <script src="../collatz.js"></script>
     <div class="actual-body" style="margin:50px !important;">
+        <h1 id="mobilewarning"></h1>
         <h2 id="chart1value"></h2>
         <input id="chart1slider" class="slider" type="range" min="1" max="5000000">
         <canvas id="chart1"></canvas>
@@ -116,8 +117,14 @@
             }
         }
         
-        if(navigator.userAgent.toLowerCase().indexOf("mobile") !== -1 && window.innerHeight > window.innerWidth) {
-            alert("Bitte nutze ein horizontales Layout für die optimale Benutzererfahrung!");
+        if(uses_mobile() && no_landscape()) {
+            document.getElementById("mobilewarning").innerHTML =
+                "Bitte nutze ein horizontales Layout für die optimale Benutzererfahrung!";
+            window.onorientationchange = () => {
+                if(!no_landscape()) document.getElementById("mobilewarning").innerHTML = "";
+                else document.getElementById("mobilewarning").innerHTML =
+                    "Bitte nutze ein horizontales Layout für die optimale Benutzererfahrung!";
+            };
         }
     </script>
 </body>

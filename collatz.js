@@ -9,6 +9,14 @@ function range(start, end) {
     return result;
 }
 
+function uses_mobile() {
+    return navigator.userAgent.toLowerCase().indexOf("mobile") !== -1;
+}
+
+function no_landscape() {
+    return window.innerHeight > window.innerWidth;
+}
+
 function slow_wasm() {
     return navigator.userAgent.toLowerCase().indexOf("firefox") !== -1;
 }
