@@ -1,6 +1,4 @@
 #pragma once
-#include <map>
-#include <stdint.h>
 
-std::map<int, int> collatz_count(int start, int end);
-int collatz_steps(uint_least64_t);
+void collatz_count(double start, double end, double *count, double countLen);
+double collatz_steps(double);
