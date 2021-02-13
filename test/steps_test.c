@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#include <collatz_steps.h>
+#include <collatz.h>
 
 typedef struct {
         double y;
