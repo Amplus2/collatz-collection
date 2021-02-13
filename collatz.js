@@ -25,12 +25,19 @@ async function get_wasm_exports(path) {
     return (await WebAssembly.instantiate(await (await fetch(path)).arrayBuffer())).instance.exports;
 }
 
+async function collatz_test(path) {
+    const exports = await get_wasm_exports(path);
+    const a = new Int32Array(exports.memory, 0, 100);
+    exports._Z19collatz_batch_stepsiiPi(1n, 100000n, a.byteOffset);
+    console.log(a);
+}
+
 async function collatz_steps(path, range) {
     if (slow_wasm()) return collatz_steps_js(range);
     const result = [];
     const exports = await get_wasm_exports(path);
-    const collatz_steps = exports.collatz_steps;
-    for (var i = 0; i < range.length; i++) result.push(collatz_steps(range[i]));
+    const collatz_steps = exports._Z13collatz_stepsy;
+    for (var i = 0; i < range.length; i++) result.push(collatz_steps(BigInt(range[i])));
     return result;
 }
 
