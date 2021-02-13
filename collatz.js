@@ -69,6 +69,5 @@ async function collatz_amount_steps(path, range) {
         if (!result.has(a)) result.set(a, 1);
         else result.set(a, 1 + result.get(a));
     }
-    collatz_test();
     return result;
 }
