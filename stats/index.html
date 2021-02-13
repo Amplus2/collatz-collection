@@ -115,7 +115,10 @@
                 document.getElementById("chart2value").appendChild(button);
             }
         }
-
+        
+        if(navigator.userAgent.toLowerCase().indexOf("mobile") !== -1 && window.innerHeight > window.innerWidth) {
+            alert("Bitte nutze ein horizontales Layout für die optimale Benutzererfahrung!");
+        }
     </script>
 </body>
 </html>
