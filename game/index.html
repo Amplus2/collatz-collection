@@ -10,17 +10,47 @@
 </head>
 <body>
     <script src="../collatz.js"></script>
-    <div id="divbox">
-        <div style="height: 100%; width: 50%; float: left; background: blueviolet;" class="center-children">
-            <h1 style="font-size: 70pt;">21</h1>
-        </div>
-        <div style="height: 100%; width: 50%; float: right; background: orange;" class="center-children">
-            <h1 style="font-size: 70pt;">19</h1>
-        </div>
+    <header class="center-children" style="position: absolute; left: 0; right: 0;">
+        <h1 style="font-size: 40pt; text-align: center;">score<br/>0</h1>
+    </header>
+    <div style="height: 100%; width: 50%; float: left; background: blueviolet;" class="center-children">
+        <h1 style="font-size: 70pt;" id="num1text">21</h1>
+    </div>
+    <div style="height: 100%; width: 50%; float: right; background: orange;" class="center-children">
+        <h1 style="font-size: 70pt;" id="num2text">19</h1>
     </div>
     <script>
-        const divbox = document.getElementById('divbox');
-        divbox.style.height = window.innerHeight.toString() + "px";
+        var last_random;
+        function random(max) {
+            var result;
+            do result = Math.floor(Math.random() * max);
+            while(result == last_random);
+            last_random = result;
+            return result;
+        }
+
+        function sleep(millis) { return new Promise(resolve => setTimeout(resolve, millis)); }
+
+        const ANIM_TIME = 75;
+
+        var num1 = random(1000);
+        var num2 = random(1000);
+
+        const num1text = document.getElementById("num1text");
+        const num2text = document.getElementById("num2text");
+        async function update_text(element, num) {
+            var i = 0;
+            const i1 = Math.round(ANIM_TIME, 1000 / 60);
+            const text1counter = setInterval(() => {
+                const i2 = ++i / i1 * (2 - i / i1);
+                const i3 = Math.round(num * i2);
+                if(num !== i3) element.innerHTML = i3;
+                if(i === i1) clearInterval(text1counter);
+            }, 2 * ANIM_TIME * i / num ** 2);
+        }
+
+        update_text(num1text, num1);
+        update_text(num2text, num2);
     </script>
 </body>
 </html>
