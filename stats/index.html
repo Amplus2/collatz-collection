@@ -91,30 +91,32 @@
         update_chart2();
 
         chart1slider.oninput = () => {
-            document.getElementById("chart1value").innerHTML = chart1slider.value + "  ";
-            if(chart1slider.value !== last_chart1value) {
+            const chart1value = document.getElementById("chart1value");
+            chart1value.innerHTML = chart1slider.value + "  ";
+            if(chart1slider.value !== last_chart1value && chart1value.children.length === 0) {
                 const button = document.createElement('button');
                 button.innerHTML = "update";
                 button.onclick = () => {
-                    document.getElementById("chart1value").removeChild(button);
+                    chart1value.removeChild(button);
                     last_chart1value = chart1slider.value;
                     update_chart1();
                 }
-                document.getElementById("chart1value").appendChild(button);
+                chart1value.appendChild(button);
             }
         }
 
         chart2slider.oninput = () => {
-            document.getElementById("chart2value").innerHTML = chart2slider.value + "  ";
-            if(chart2slider.value !== last_chart2value) {
+            const chart2value = document.getElementById("chart2value");
+            chart2value.innerHTML = chart2slider.value + "  ";
+            if(chart2slider.value !== last_chart2value && chart2value.children.length === 0) {
                 const button = document.createElement('button');
                 button.innerHTML = "update";
                 button.onclick = () => {
-                    document.getElementById("chart2value").removeChild(button);
+                    chart2value.removeChild(button);
                     last_chart2value = chart2slider.value;
                     update_chart2();
                 }
-                document.getElementById("chart2value").appendChild(button);
+                chart2value.appendChild(button);
             }
         }
         
