@@ -3,7 +3,7 @@
 #include <collatz.h>
 
 typedef struct {
-        double y;
+        int y;
         double x;
 } test_case;
 
@@ -84,10 +84,10 @@ int main() {
         int failed = 0;
         clock_t start = clock();
         for(uint_least64_t i = 0; i < len(cases); i++) {
-                double got = collatz_steps(cases[i].x);
+                int got = collatz_steps(cases[i].x);
                 if(got != cases[i].y) {
                         printf("Failed test case: "
-                               "{x: %llu, got: %llu, want: %llu}\n",
+                               "{x: %lf, got: %d, want: %d}\n",
                                cases[i].x, got, cases[i].y);
                         failed++;
                 }
