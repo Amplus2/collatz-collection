@@ -36,3 +36,36 @@ header *:hover {
     display: grid;
     place-items: center;
 }
+
+.slider {
+    appearance: none;
+    width: 100%;
+    height: 15px;
+    background: #ffffff;
+    outline: none;
+    border-radius: 5px;
+    opacity: 0.9;
+    transition: opacity 200ms;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%; 
+    background: #0e93ff;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    appearance: none;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: #0e93ff;
+    cursor: pointer;
+}

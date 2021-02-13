@@ -11,46 +11,111 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha256-t9UJPrESBeG2ojKTIcFLPGF7nHi2vEc7f5A2KpH/UBU=" crossorigin="anonymous"></script>
     <script src="../collatz.js"></script>
     <div class="actual-body" style="margin:50px !important;">
+        <h2 id="chart1value"></h2>
+        <input id="chart1slider" class="slider" type="range" min="1" max="5000000">
         <canvas id="chart1"></canvas>
+        <h1>​</h1>
+        <h2 id="chart2value"></h2>
+        <input id="chart2slider" class="slider" type="range" min="1" max="5000">
         <canvas id="chart2"></canvas>
     </div>
     <script>
-        (async () => {
-            const collatz_nums_steps = await collatz_amount_steps("../collatz_steps.wasm", range(1, 10 ** 5));
-            const chart1 = new Chart(document.getElementById('chart1'), {
+        var chart1;
+        var chart2;
+        
+        const chart1slider = document.getElementById("chart1slider");
+        const chart2slider = document.getElementById("chart2slider");
+
+        chart1slider.value = 10000;
+        chart2slider.value = 300;
+
+        var last_chart1value = chart1slider.value;
+        var last_chart2value = chart2slider.value;
+
+        document.getElementById("chart1value").innerHTML = chart1slider.value;
+        document.getElementById("chart2value").innerHTML = chart2slider.value;
+
+        Chart.defaults.global.defaultFontColor = "#ffffff";
+        Chart.defaults.global.beginAtZero = true;
+
+        async function update_chart1() {
+            if(chart1 !== undefined) chart1.destroy();
+            const collatz_nums_steps = await collatz_amount_steps("../collatz_steps.wasm", range(1, last_chart1value));
+            chart1 = new Chart(document.getElementById("chart1"), {
                 type: "bar",
                 data: {
                     labels: Array.from(collatz_nums_steps.keys()),
                     datasets: [{
                         label: "Anzahl der Zahlen mit n Schritten",
                         data: Array.from(collatz_nums_steps.values()),
-                        backgroundColor: 'green'
+                        backgroundColor: "green"
                     }]
                 },
                 options: {
                     scales: {
-                        yAxes: [{ ticks: { beginAtZero: true }, gridLines: { color: 'rgba(255, 255, 255, 1)' } }]
+                        yAxes: [{ gridLines: { color: "#ffffff" } }],
+                        xAxes: [{ gridLines: { color: "#3a3a3a" } }]
                     },
                 }
             });
+        }
 
-            const chart2 = new Chart(document.getElementById('chart2'), {
+        async function update_chart2() {
+            const scroll_offset = window.scrollY;
+            if(chart2 !== undefined) chart2.destroy();
+            const chart2range = range(1, last_chart2value);
+            const chart2steps = await collatz_steps("../collatz_steps.wasm", chart2range);
+            chart2 = new Chart(document.getElementById("chart2"), {
                 type: "bar",
                 data: {
-                    labels: range(1, 3000),
+                    labels: chart2range,
                     datasets: [{
                         label: "Länge der Collatz-Folge",
-                        data: await collatz_steps("../collatz_steps.wasm", range(1, 3000)),
-                        backgroundColor: 'orange'
+                        data: chart2steps,
+                        backgroundColor: "orange"
                     }]
                 },
                 options: {
                     scales: {
-                        yAxes: [{ ticks: { beginAtZero: true }, gridLines: { color: 'rgba(255, 255, 255, 1)' } }]
+                        yAxes: [{ gridLines: { color: "#ffffff" } }],
+                        xAxes: [{ gridLines: { color: "#3a3a3a" } }]
                     },
                 }
             });
-        })();
+            window.scrollTo({top:scroll_offset});
+        }
+
+        update_chart1();
+        update_chart2();
+
+        chart1slider.oninput = () => {
+            document.getElementById("chart1value").innerHTML = chart1slider.value + "  ";
+            if(chart1slider.value !== last_chart1value) {
+                const button = document.createElement('button');
+                button.innerHTML = "update";
+                button.onclick = () => {
+                    document.getElementById("chart1value").removeChild(button);
+                    last_chart1value = chart1slider.value;
+                    update_chart1();
+                }
+                document.getElementById("chart1value").appendChild(button);
+            }
+        }
+
+        chart2slider.oninput = () => {
+            document.getElementById("chart2value").innerHTML = chart2slider.value + "  ";
+            if(chart2slider.value !== last_chart2value) {
+                const button = document.createElement('button');
+                button.innerHTML = "update";
+                button.onclick = () => {
+                    document.getElementById("chart2value").removeChild(button);
+                    last_chart2value = chart2slider.value;
+                    update_chart2();
+                }
+                document.getElementById("chart2value").appendChild(button);
+            }
+        }
+
     </script>
 </body>
 </html>
