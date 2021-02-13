@@ -40,7 +40,6 @@ async function collatz_steps(path, range) {
     const exports = await get_wasm_exports(path);
     const collatz_steps = exports._Z13collatz_stepsy;
     for (var i = 0; i < range.length; i++) result.push(collatz_steps(BigInt(range[i])));
-    collatz_test(exports);
     return result;
 }
 
