@@ -1,4 +1,5 @@
 #include "collatz_steps.h"
+#include <stdint.h>
 
 #ifdef EMSCRIPTEN_KEEPALIVE
 EMSCRIPTEN_KEEPALIVE

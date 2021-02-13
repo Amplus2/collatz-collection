@@ -7,5 +7,5 @@ test {
 wasm {
         %SET CC emcc
         %APPEND CFLAGS -s WASM=1 --no-entry
-        %CC collatz_steps.wasm src/wasm.c
+        %CC collatz.wasm src/wasm.c
 }
