@@ -117,14 +117,14 @@
             }
         }
         
-        if(uses_mobile() && no_landscape()) {
-            document.getElementById("mobilewarning").innerHTML =
-                "Bitte nutze ein horizontales Layout für die optimale Benutzererfahrung!";
-            window.onorientationchange = () => {
+        if(uses_mobile()) {
+            function on_layout_update() {
                 if(!no_landscape()) document.getElementById("mobilewarning").innerHTML = "";
                 else document.getElementById("mobilewarning").innerHTML =
                     "Bitte nutze ein horizontales Layout für die optimale Benutzererfahrung!";
             };
+            on_layout_update();
+            window.onorientationchange = on_layout_update;
         }
     </script>
 </body>
