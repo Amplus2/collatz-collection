@@ -10,7 +10,8 @@ double *collatz_count(double start, double end, double countLen) {
         double *count = malloc(countLen * sizeof(double));
         bzero(count, countLen * sizeof(double));
         for(double i = start; i < end; i++) {
-                count[(int)collatz_steps(i)]++;
+                double steps = collatz_steps(i);
+                if(steps < countLen) count[(int)steps]++;
         }
         return count;
 }
