@@ -6,6 +6,7 @@ test {
 
 wasm {
         %SET CPPC em++
-        %APPEND CPPFLAGS -s WASM=1 --no-entry -Wno-dollar-in-identifier-extension
+        %APPEND CPPFLAGS -s WASM=1 --no-entry -Wl,--demangle
+        %APPEND CPPFLAGS -Wno-dollar-in-identifier-extension
         %CPPC collatz.wasm src/wasm.cpp
 }

@@ -1,33 +1,34 @@
 #include "wasm-diagrams.h"
 #include <emscripten.h>
+#include "collatz.h"
 
-void setScale(std::string &canvas, double xScale, double yScale) {
+void setScale(std::string canvas, double xScale, double yScale) {
         EM_ASM({
                 document.getElementById($0).getContext('2d')
                         .setTransform($1, 0, 0, $2, 0, 0);
         }, canvas.c_str(), xScale, yScale);
 }
 
-void setFillStyle(std::string &canvas, std::string &fillStyle) {
+void setFillStyle(std::string canvas, std::string fillStyle) {
         EM_ASM({
                 document.getElementById($0).getContext('2d')
                         .fillStyle = $1;
         }, canvas.c_str(), fillStyle.c_str());
 }
 
-int getWidth(std::string &canvas) {
+int getWidth(std::string canvas) {
         return EM_ASM_INT({
                 return document.getElementById($0).width;
         }, canvas.c_str());
 }
 
-int getHeight(std::string &canvas) {
+int getHeight(std::string canvas) {
         return EM_ASM_INT({
                 return document.getElementById($0).height;
         }, canvas.c_str());
 }
 
-void fillRect(std::string &canvas,
+void fillRect(std::string canvas,
               double x, double y,
               double width, double height) {
         EM_ASM({
@@ -36,11 +37,11 @@ void fillRect(std::string &canvas,
         }, canvas.c_str(), x, y, width, height);
 }
 
-void drawChartToCanvas(std::string       &canvas,
+void drawChartToCanvas(std::string        canvas,
                        std::map<int, int> data,
                        unsigned           width,
                        unsigned           height,
-                       std::string       &fillStyle) {
+                       std::string        fillStyle) {
         auto xScale = (double)width  / (double)getWidth(canvas);
         auto yScale = (double)height / (double)getHeight(canvas);
         setScale(canvas, xScale, yScale);
@@ -48,4 +49,14 @@ void drawChartToCanvas(std::string       &canvas,
         for(std::pair<int, int> pair : data) {
                 fillRect(canvas, pair.first, pair.second, 1, pair.second);
         }
+}
+
+extern "C" void drawCountChart(char *canvas,
+                               int start, int end,
+                               int width, int height,
+                               char *fillStyle) {
+        drawChartToCanvas(canvas,
+                          collatz_count(start, end),
+                          width, height,
+                          fillStyle);
 }
