@@ -1,3 +1,5 @@
+import "./collatz"
+
 function range(start, end) {
     const result = [];
     if (end === undefined)
@@ -25,27 +27,16 @@ async function get_wasm_exports(path) {
     return (await WebAssembly.instantiate(await (await fetch(path)).arrayBuffer())).instance.exports;
 }
 
-var ran_once = false;
-async function collatz_test(exports) {
-    if (ran_once) return;
-    ran_once = true;
-    const a = new Int32Array(exports.memory);
-    exports._Z19collatz_batch_stepsiiPi(1n, 100n, a.byteOffset);
-    console.log(a);
-}
-
-async function collatz_steps(path, range) {
+async function collatz_steps(range) {
     if (slow_wasm()) return collatz_steps_js(range);
     const result = [];
-    const exports = await get_wasm_exports(path);
-    const collatz_steps = exports.collatz_steps;
-    for (var i = 0; i < range.length; i++) result.push(collatz_steps(BigInt(range[i])));
+    const collatz_steps = Module._collatz_steps;
+    for (var i = 0; i < range.length; i++) result.push(collatz_steps(range[i]));
     return result;
 }
 
-async function collatz_draw_counts(path, canvas, end, width, height, fillStyle) {
-    const exports = await get_wasm_exports(path);
-    exports.drawCountChart(canvas, 1, end, width, height, fillStyle);
+async function collatz_draw_counts(canvas, end, width, height, fillStyle) {
+    Module._drawCountChart(canvas, 1, end, width, height, fillStyle);
 }
 
 function collatz_steps_js(range) {
@@ -64,8 +55,8 @@ function collatz_steps_js(range) {
 }
 
 
-async function collatz_amount_steps(path, range) {
-    const collatz_nums = await collatz_steps(path, range);
+async function collatz_amount_steps(range) {
+    const collatz_nums = await collatz_steps(range);
     collatz_nums.sort((a, b) => a - b);
     const result = new Map();
     for (var i = 0; i < collatz_nums.length; i++) {
