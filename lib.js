@@ -1,5 +1,3 @@
-import "./collatz"
-
 function range(start, end) {
     const result = [];
     if (end === undefined)
