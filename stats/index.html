@@ -58,6 +58,13 @@
                         yAxes: [{ gridLines: { color: "#ffffff" } }],
                         xAxes: [{ gridLines: { color: "#3a3a3a" } }]
                     },
+                    tooltips: {
+                        callbacks: {
+                            title: (data) => data[0].xLabel + ", " + data[0].yLabel,
+                            label: (item) => 
+                                "Anzahl der Zahlen mit " + item.xLabel + " Schritten: " + item.yLabel
+                        }
+                    }
                 }
             });
         }
@@ -82,6 +89,13 @@
                         yAxes: [{ gridLines: { color: "#ffffff" } }],
                         xAxes: [{ gridLines: { color: "#3a3a3a" } }]
                     },
+                    tooltips: {
+                        callbacks: {
+                            title: (data) => data[0].xLabel + ", " + data[0].yLabel,
+                            label: (item, data) => 
+                            data.datasets[item.datasetIndex].label + " von " + item.xLabel + ": " + item.yLabel
+                        }
+                    }
                 }
             });
             window.scrollTo({top:scroll_offset});
