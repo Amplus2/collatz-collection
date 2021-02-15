@@ -51,6 +51,7 @@ void drawChartToCanvas(std::string        canvas,
         }
 }
 
+EMSCRIPTEN_KEEPALIVE
 extern "C" void drawCountChart(char *canvas,
                                int start, int end,
                                int width, int height,

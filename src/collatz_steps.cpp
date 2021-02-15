@@ -1,7 +1,7 @@
 #include "collatz.h"
 
 EMSCRIPTEN_KEEPALIVE
-int collatz_steps(int ibadbecauseonly32bits) {
+extern "C" int collatz_steps(int ibadbecauseonly32bits) {
         int n;
         uint_least64_t i = ibadbecauseonly32bits;
         for(n = 0; i > 1; n++) {
