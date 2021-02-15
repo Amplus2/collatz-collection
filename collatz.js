@@ -38,9 +38,14 @@ async function collatz_steps(path, range) {
     //if (slow_wasm()) return collatz_steps_js(range);
     const result = [];
     const exports = await get_wasm_exports(path);
-    const collatz_steps = exports._Z13collatz_stepsy;
-    for (var i = 0; i < range.length; i++) result.push(collatz_steps(BigInt(range[i])));
+    const collatz_steps = exports.collatz_steps;
+    for (var i = 0; i < range.length; i++) result.push(collatz_steps(range[i]));
     return result;
+}
+
+async function collatz_draw_counts(path, canvas, end, width, height, fillStyle) {
+    const exports = await get_wasm_exports(path);
+    exports.drawCountChart(canvas, 1, end, width, height, fillStyle);
 }
 
 function collatz_steps_js(range) {
