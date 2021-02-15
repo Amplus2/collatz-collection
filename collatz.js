@@ -35,11 +35,11 @@ async function collatz_test(exports) {
 }
 
 async function collatz_steps(path, range) {
-    //if (slow_wasm()) return collatz_steps_js(range);
+    if (slow_wasm()) return collatz_steps_js(range);
     const result = [];
     const exports = await get_wasm_exports(path);
     const collatz_steps = exports.collatz_steps;
-    for (var i = 0; i < range.length; i++) result.push(collatz_steps(range[i]));
+    for (var i = 0; i < range.length; i++) result.push(collatz_steps(BigInt(range[i])));
     return result;
 }
 
