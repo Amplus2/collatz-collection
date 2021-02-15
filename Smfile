@@ -10,3 +10,7 @@ wasm {
         %APPEND CPPFLAGS -Wno-dollar-in-identifier-extension
         %CPPC collatz.js src/wasm.cpp
 }
+
+wat (wasm) {
+        !wasm2wat collatz.wasm
+}
