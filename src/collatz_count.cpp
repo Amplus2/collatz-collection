@@ -1,11 +1,13 @@
 #include "collatz.h"
+#include <map>
 
 #ifdef EMSCRIPTEN_KEEPALIVE
 EMSCRIPTEN_KEEPALIVE
 #endif
-void collatz_count(int start, int end, int *counts, int count_len) {
+std::map<int, int> collatz_count(int start, int end) {
+        std::map<int, int> counts;
         for(int i = start; i < end; i++) {
-                int steps = collatz_steps(i);
-                if(steps < count_len) counts[steps]++;
+                counts[collatz_steps(i)]++;
         }
+        return counts;
 }

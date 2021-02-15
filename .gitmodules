@@ -1,3 +1,0 @@
-[submodule "third-party/wasm-canvas"]
-	path = third-party/wasm-canvas
-	url = https://github.com/alextyner/wasm-canvas.git

@@ -1,13 +1,11 @@
 test {
-        !git submodule init --recursive
         %APPEND CPPFLAGS -Isrc
         %CPPC testexe src/collatz_steps.cpp test/*.cpp
         !./testexe
 }
 
 wasm {
-        !git submodule init --recursive
         %SET CPPC em++
-        %APPEND CPPFLAGS -s WASM=1 --no-entry
+        %APPEND CPPFLAGS -s WASM=1 --no-entry -Wno-dollar-in-identifier-extension
         %CPPC collatz.wasm src/wasm.cpp
 }
