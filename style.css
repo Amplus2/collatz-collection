@@ -74,3 +74,12 @@ body {
     background: #0e93ff;
     cursor: pointer;
 }
+
+.text-button {
+    cursor: pointer;
+    transition-duration: 300ms;
+}
+
+.text-button:hover {
+    color: #8e8e8e;
+}
