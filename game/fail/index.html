@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#030303">
     <title>collatz-collection</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../style.css">
 </head>
 <body class="center-children">
     <div>
@@ -14,13 +14,13 @@
         <h1 style="font-size: 35pt; margin: 0; text-align: center;" id="score">Dein Score: </h1>
     </div>
     <script>
-        const get_params = window.location.search.substr(1);
-        console.log(get_params);
-        if (!isNaN(get_params)) document.getElementById("score").innerHTML += get_params;
-        else document.getElementById("score").innerHTML += "0";
-
-        if (window.location.href.indexOf("?") !== -1)
-            window.location.href = window.location.href.split("?")[0];
+        if(localStorage["score"] === undefined)
+            document.getElementById("score").innerHTML += "0";
+        else {
+            const score = localStorage["score"];
+            if (!isNaN(score)) document.getElementById("score").innerHTML += score;
+            else document.getElementById("score").innerHTML += "0";
+        }
     </script>
 </body>
 </html>

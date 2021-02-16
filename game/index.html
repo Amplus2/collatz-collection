@@ -88,13 +88,19 @@
         function higher() {
             if (Number(num1text_steps.innerHTML) >= single_collatz_step(num2))
                 go_next();
-            else window.location.href = "/game/fail?" + score;
+            else {
+                localStorage["score"] = score;
+                window.location.href ="/game/fail";
+            }
         }
 
         function lower() {
             if (Number(num1text_steps.innerHTML) <= single_collatz_step(num2))
                 go_next();
-            else window.location.href ="/game/fail?" + score;
+            else {
+                localStorage["score"] = score;
+                window.location.href ="/game/fail";
+            }
         }
 
         update_all_texts();
