@@ -2,18 +2,18 @@
 #include "collatz.h"
 #include <emscripten.h>
 
-void setScale(std::string canvas, double xScale, double yScale) {
+void setScale(char *canvas, double xScale, double yScale) {
         EM_ASM({
                 document.getElementById($0).getContext('2d')
                         .setTransform($1, 0, 0, $2, 0, 0);
-        }, canvas.c_str(), xScale, yScale);
+        }, canvas, xScale, yScale);
 }
 
-void setFillStyle(std::string canvas, std::string fillStyle) {
+void setFillStyle(char *canvas, char *fillStyle) {
         EM_ASM({
                 document.getElementById($0).getContext('2d')
                         .fillStyle = $1;
-        }, canvas.c_str(), fillStyle.c_str());
+        }, canvas, fillStyle);
 }
 
 struct dimensions {
@@ -21,30 +21,30 @@ struct dimensions {
         int height;
 };
 
-struct dimensions getDimensions(std::string canvas) {
+struct dimensions getDimensions(char *canvas) {
         int width = EM_ASM_INT({
                 return document.getElementById($0).width;
-        }, canvas.c_str());
+        }, canvas);
         int height = EM_ASM_INT({
                 return document.getElementById($0).height;
-        }, canvas.c_str());
+        }, canvas);
         return {width, height};
 }
 
-void fillRect(std::string canvas,
+void fillRect(char *canvas,
               double x, double y,
               double width, double height) {
         EM_ASM({
                 document.getElementById($0).getContext('2d')
                         .fillRect($1, $2, $3, $4);
-        }, canvas.c_str(), x, y, width, height);
+        }, canvas, x, y, width, height);
 }
 
-void draw_chart_to_canvas(std::string        canvas,
+void draw_chart_to_canvas(char              *canvas,
                           std::map<int, int> data,
                           unsigned           width,
                           unsigned           height,
-                          std::string        fillStyle) {
+                          char              *fillStyle) {
         auto dimensions = getDimensions(canvas);
         auto xScale = (double)width  / (double)dimensions.width;
         auto yScale = (double)height / (double)dimensions.height;

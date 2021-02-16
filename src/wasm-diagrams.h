@@ -1,11 +1,10 @@
 #include <map>
-#include <string>
 
-void draw_chart_to_canvas(std::string        canvas,
+void draw_chart_to_canvas(char              *canvas,
                           std::map<int, int> data,
                           unsigned           width,
                           unsigned           height,
-                          std::string        fillStyle);
+                          char              *fillStyle);
 
 extern "C" void draw_count_chart(char *canvas,
                                  int start, int end,
