@@ -39,6 +39,8 @@
             }
         }
 
+        console.log(single_collatz_step(512));
+
         var last_random;
         function random(max) {
             var result;
@@ -48,7 +50,7 @@
             return result;
         }
 
-        const ANIM_TIME = 75;
+        const ANIM_TIME = 2000;
 
         var num1 = random(1000);
         var num2 = random(1000);
@@ -60,10 +62,12 @@
         const num2text = document.getElementById("num2text");
 
         async function update_text(element, num) {
+            num = num + 1;
             var i = 0;
-            const i1 = Math.round(ANIM_TIME, 1000 / 60);
+            const i1 = Math.round(ANIM_TIME / (100 / 6));
             const text1counter = setInterval(() => {
-                const i2 = ++i / i1 * (2 - i / i1);
+                i += 1;
+                const i2 = (i / i1) * (2 - (i / i1));
                 const i3 = Math.round(num * i2);
                 if(num !== i3) element.innerHTML = i3;
                 if(i === i1) clearInterval(text1counter);
