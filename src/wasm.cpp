@@ -1,5 +1,6 @@
 #include <emscripten.h>
-#include "collatz_steps.cpp"
-#include "collatz_count.cpp"
-#include "collatz_steps_batch.cpp"
+
+#define DEBUG
+
+#include "collatz.cpp"
 #include "wasm-diagrams.cpp"
