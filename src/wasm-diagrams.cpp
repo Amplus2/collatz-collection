@@ -80,23 +80,17 @@ void draw_chart_to_canvas(char              *canvas,
 }
 
 EMSCRIPTEN_KEEPALIVE
-extern "C" void draw_count_chart(char *canvas,
-                                 int start, int end,
-                                 int width, int height,
-                                 char *fillStyle) {
-        draw_chart_to_canvas(canvas,
+extern "C" void draw_count_chart(int start, int end, int width, int height) {
+        draw_chart_to_canvas("chart1",
                              collatz_count(start, end),
                              width, height,
-                             fillStyle);
+                             "rgb(255, 100, 100)");
 }
 
 EMSCRIPTEN_KEEPALIVE
-extern "C" void draw_step_chart(char *canvas,
-                                int start, int end,
-                                int width, int height,
-                                char *fillStyle) {
-        draw_chart_to_canvas(canvas,
+extern "C" void draw_step_chart(int start, int end, int width, int height) {
+        draw_chart_to_canvas("chart2",
                              collatz_batch_steps(start, end),
                              width, height,
-                             fillStyle);
+                             "rgb(255, 100, 100)");
 }
