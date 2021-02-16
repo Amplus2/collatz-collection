@@ -4,6 +4,10 @@
 #include <iostream>
 
 void setScale(char *canvas, double xScale, double yScale) {
+#ifdef DEBUG
+        std::cout << "applying scale (" << xScale << "," << yScale << ") to "
+                  << "canvas \"" << canvas << "\"" << std::endl;
+#endif
         EM_ASM({
                 document.getElementById(UTF8ToString($0)).getContext('2d')
                         .setTransform($1, 0, 0, $2, 0, 0);
@@ -11,6 +15,10 @@ void setScale(char *canvas, double xScale, double yScale) {
 }
 
 void setFillStyle(char *canvas, char *fillStyle) {
+#ifdef DEBUG
+        std::cout << "applying fill style \"" << fillStyle << "\" to "
+                  << "canvas \"" << canvas << "\"" << std::endl;
+#endif
         EM_ASM({
                 document.getElementById(UTF8ToString($0)).getContext('2d')
                         .fillStyle = $1;
@@ -23,18 +31,33 @@ struct dimensions {
 };
 
 struct dimensions getDimensions(char *canvas) {
+#ifdef DEBUG
+        std::cout << "getting dimensions from "
+                  << "canvas \"" << canvas << "\"" << std::endl;
+#endif
         int width = EM_ASM_INT({
                 return document.getElementById(UTF8ToString($0)).width;
         }, canvas);
         int height = EM_ASM_INT({
                 return document.getElementById(UTF8ToString($0)).height;
         }, canvas);
+#ifdef DEBUG
+        std::cout << "got dimensions (" << width << "," << height << ") from "
+                  << "canvas \"" << canvas << "\"" << std::endl;
+#endif
         return {width, height};
 }
 
 void fillRect(char *canvas,
               double x, double y,
               double width, double height) {
+#ifdef DEBUG
+        std::cout << "filling (" << x      << ","
+                                 << y      << ","
+                                 << width  << ","
+                                 << height << ") on "
+                  << "canvas \"" << canvas << "\"" << std::endl;
+#endif
         EM_ASM({
                 document.getElementById(UTF8ToString($0)).getContext('2d')
                         .fillRect($1, $2, $3, $4);
