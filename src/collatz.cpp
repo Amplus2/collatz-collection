@@ -5,7 +5,7 @@ EMSCRIPTEN_KEEPALIVE
 extern "C" int collatz_steps(int ibadbecauseonly32bits) {
         int n;
         uint_least64_t i = ibadbecauseonly32bits;
-#ifdef DEBUG
+#if defined(DEBUG) && defined(HIGHDEBUG)
         std::cout << "running collatz_steps for " << i << std::endl;
 #endif
         for(n = 0; i > 1; n++) {

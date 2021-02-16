@@ -51,7 +51,7 @@ struct dimensions getDimensions(char *canvas) {
 void fillRect(char *canvas,
               double x, double y,
               double width, double height) {
-#ifdef DEBUG
+#if defined(DEBUG) && defined(HIGHDEBUG)
         std::cout << "filling (" << x      << ","
                                  << y      << ","
                                  << width  << ","
