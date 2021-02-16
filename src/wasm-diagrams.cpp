@@ -1,17 +1,18 @@
 #include "wasm-diagrams.h"
 #include "collatz.h"
 #include <emscripten.h>
+#include <iostream>
 
 void setScale(char *canvas, double xScale, double yScale) {
         EM_ASM({
-                document.getElementById($0).getContext('2d')
+                document.getElementById(UTF8ToString($0)).getContext('2d')
                         .setTransform($1, 0, 0, $2, 0, 0);
         }, canvas, xScale, yScale);
 }
 
 void setFillStyle(char *canvas, char *fillStyle) {
         EM_ASM({
-                document.getElementById($0).getContext('2d')
+                document.getElementById(UTF8ToString($0)).getContext('2d')
                         .fillStyle = $1;
         }, canvas, fillStyle);
 }
@@ -23,10 +24,10 @@ struct dimensions {
 
 struct dimensions getDimensions(char *canvas) {
         int width = EM_ASM_INT({
-                return document.getElementById($0).width;
+                return document.getElementById(UTF8ToString($0)).width;
         }, canvas);
         int height = EM_ASM_INT({
-                return document.getElementById($0).height;
+                return document.getElementById(UTF8ToString($0)).height;
         }, canvas);
         return {width, height};
 }
@@ -35,7 +36,7 @@ void fillRect(char *canvas,
               double x, double y,
               double width, double height) {
         EM_ASM({
-                document.getElementById($0).getContext('2d')
+                document.getElementById(UTF8ToString($0)).getContext('2d')
                         .fillRect($1, $2, $3, $4);
         }, canvas, x, y, width, height);
 }
