@@ -34,7 +34,7 @@ async function collatz_steps(range) {
 }
 
 async function collatz_draw_counts(canvas, end, width, height, fillStyle) {
-    Module._drawCountChart(canvas, 1, end, width, height, fillStyle);
+    Module._draw_count_chart(canvas, 1, end, width, height, fillStyle);
 }
 
 function collatz_steps_js(range) {
