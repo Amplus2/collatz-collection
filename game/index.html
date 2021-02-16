@@ -23,8 +23,8 @@
         <div>
             <h1 style="font-size: 60pt; margin: 0; text-align: center;" id="num2text"></h1>
             <h1 style="margin: 0; text-align: center;">
-                <a onclick="higher()" href="#" style="text-decoration: none;">mehr</a>
-                <a onclick="lower()" href="#" style="text-decoration: none;">weniger</a>
+                <a onclick="go_next(true)" href="#" style="text-decoration: none;">mehr</a>
+                <a onclick="go_next(false)" href="#" style="text-decoration: none;">weniger</a>
             </h1>
         </div>
     </div>
@@ -77,30 +77,20 @@
             document.getElementById("score").innerHTML = score;
         }
 
-        function go_next() {
+        function go_next(higher) {
             // Best reference to LoL, LOL
+            const prev = Number(num1text_steps.innerHTML);
+            const curr = single_collatz_step(num2);
+            if(!(higher && prev >= curr ||  !higher && prev <= curr)) {
+                localStorage["score"] = score;
+                score = 0;
+                window.location.href = "/game/fail/";
+                return;
+            }
             num1 = num2;
             num2 = random(1000);
             score += 1;
             update_all_texts();
-        }
-
-        function higher() {
-            if (Number(num1text_steps.innerHTML) >= single_collatz_step(num2))
-                go_next();
-            else {
-                localStorage["score"] = score;
-                window.location.href ="/game/fail";
-            }
-        }
-
-        function lower() {
-            if (Number(num1text_steps.innerHTML) <= single_collatz_step(num2))
-                go_next();
-            else {
-                localStorage["score"] = score;
-                window.location.href ="/game/fail";
-            }
         }
 
         update_all_texts();
