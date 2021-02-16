@@ -84,7 +84,7 @@ extern "C" void draw_count_chart(int start, int end, int width, int height) {
         draw_chart_to_canvas("chart1",
                              collatz_count(start, end),
                              width, height,
-                             "rgb(255, 100, 100)");
+                             "#FF0000");
 }
 
 EMSCRIPTEN_KEEPALIVE
@@ -92,5 +92,5 @@ extern "C" void draw_step_chart(int start, int end, int width, int height) {
         draw_chart_to_canvas("chart2",
                              collatz_batch_steps(start, end),
                              width, height,
-                             "rgb(255, 100, 100)");
+                             "#FF0000");
 }
