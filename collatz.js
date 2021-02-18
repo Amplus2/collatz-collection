@@ -21,26 +21,23 @@ function slow_wasm() {
     return navigator.userAgent.toLowerCase().indexOf("firefox") !== -1;
 }
 
-async function get_wasm_exports(path) {
-    return (await WebAssembly.instantiate(await (await fetch(path)).arrayBuffer())).instance.exports;
+async function get_wasm_exports(path, memory_size) {
+    let importObj = undefined;
+    if(memory_size !== undefined) {
+        importObj = {js: {mem: new WebAssembly.Memory({initial: 10})}};
+    }
+    const res = await WebAssembly.instantiate((await fetch(path)).arrayBuffer(), importObj);
+    return res.instance.exports;
 }
 
-var ran_once = false;
-async function collatz_test(exports) {
-    if (ran_once) return;
-    ran_once = true;
-    const a = new Int32Array(exports.memory);
-    exports._Z19collatz_batch_stepsiiPi(1n, 100n, a.byteOffset);
-    console.log(a);
-}
-
-async function collatz_steps(path, range) {
+async function collatz_steps(path, start, end) {
     //if (slow_wasm()) return collatz_steps_js(range);
-    const result = [];
-    const exports = await get_wasm_exports(path);
-    const collatz_steps = exports._Z13collatz_stepsd;
-    for (var i = 0; i < range.length; i++) result.push(collatz_steps(range[i]));
-    return result;
+    const exports = await get_wasm_exports(path, (end-start)*2);
+    const len = end-start;
+    const k = new Int32Array(exports.memory.buffer,   0*4, len);
+    const v = new Int32Array(exports.memory.buffer, len*4, len);
+    exports.collatz_batch_steps(start, end, k.byteOffset, v.byteOffset);
+    return [Array.from(k), Array.from(v)];
 }
 
 function collatz_steps_js(range) {
@@ -59,8 +56,8 @@ function collatz_steps_js(range) {
 }
 
 
-async function collatz_amount_steps(path, range) {
-    const collatz_nums = await collatz_steps(path, range);
+async function collatz_amount_steps(path, start, end) {
+    const collatz_nums = (await collatz_steps(path, start, end))[1];
     collatz_nums.sort((a, b) => a - b);
     const result = new Map();
     for (var i = 0; i < collatz_nums.length; i++) {
