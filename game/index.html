@@ -87,7 +87,6 @@
             // Best reference to LoL, LOL
             const prev = Number(num1text_steps.innerHTML);
             const curr = single_collatz_step(num2);
-            console.log("prev:", prev+",", "curr:",curr);
             if(higher && prev > curr || !higher && prev < curr) {
                 localStorage["score"] = score;
                 score = 0;
