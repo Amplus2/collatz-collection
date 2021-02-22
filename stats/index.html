@@ -71,9 +71,8 @@
 
         async function update_chart2() {
             const scroll_offset = window.scrollY;
-            const chart2data = await collatz_steps("../collatz.wasm", 1, last_chart2value);
-            const chart2range = chart2data[0];
-            const chart2steps = chart2data[1];
+            const chart2range = range(1, last_chart2value);
+            const chart2steps = await collatz_steps("../collatz.wasm", 1, last_chart2value);
             if(chart2 !== undefined) chart2.destroy();
             chart2 = new Chart(document.getElementById("chart2"), {
                 type: "bar",

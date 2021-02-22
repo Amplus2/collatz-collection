@@ -12,18 +12,15 @@ extern "C" int collatz_steps(double doublesarebad) {
 }
 
 EMSCRIPTEN_KEEPALIVE
-extern "C" void collatz_count(int start, int end, int *keys, int *vals) {
+extern "C" void collatz_count(int start, int end, int *values) {
         for(int i = start; i < end; i++) {
-                int steps = collatz_steps(i);
-                keys[steps - 1] = steps;
-                vals[steps - 1]++;
+                values[collatz_steps(i) - 1]++;
         }
 }
 
 EMSCRIPTEN_KEEPALIVE
-extern "C" void collatz_batch_steps(int start, int end, int *keys, int *vals) {
+extern "C" void collatz_batch_steps(int start, int end, int *values) {
         for(int i = start; i < end; i++) {
-                keys[i - start] = i;
-                vals[i - start] = collatz_steps(i);
+                values[i - start] = collatz_steps(i);
         }
 }
