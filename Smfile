@@ -1,11 +1,13 @@
 test {
         %APPEND CPPFLAGS -Isrc
-        %CPPC testexe src/collatz_steps.cpp test/*.cpp
+        %CPPC testexe src/collatz.cc test/*.cc
         !./testexe
 }
 
 wasm {
         %SET CPPC em++
         %APPEND CPPFLAGS -s WASM=1 --no-entry
-        %CPPC collatz.wasm src/wasm.cpp
+        %CPPC collatz.wasm src/wasm.cc
 }
+
+all (test wasm) {}

@@ -30,7 +30,7 @@ async function collatz_test(exports) {
     if (ran_once) return;
     ran_once = true;
     const a = new Int32Array(exports.memory);
-    exports._Z19collatz_batch_stepsiiPi(1n, 100n, a.byteOffset);
+    exports.collatz_batch_steps(1n, 100n, a.byteOffset);
     console.log(a);
 }
 
@@ -38,7 +38,7 @@ async function collatz_steps(path, range) {
     //if (slow_wasm()) return collatz_steps_js(range);
     const result = [];
     const exports = await get_wasm_exports(path);
-    const collatz_steps = exports._Z13collatz_stepsd;
+    const collatz_steps = exports.collatz_steps;
     for (var i = 0; i < range.length; i++) result.push(collatz_steps(range[i]));
     return result;
 }
@@ -57,7 +57,6 @@ function collatz_steps_js(range) {
     for(var i = 0; i < range.length; i++) result.push(steps(range[i]));
     return result;
 }
-
 
 async function collatz_amount_steps(path, range) {
     const collatz_nums = await collatz_steps(path, range);
