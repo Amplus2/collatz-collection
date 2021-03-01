@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
-#include <collatz.h>
+#include <collatz.hh>
+#include <stdint.h>
 
 typedef struct {
         int y;
@@ -83,7 +84,7 @@ const test_case cases[] = {
 int main() {
         int failed = 0;
         clock_t start = clock();
-        for(uint_least64_t i = 0; i < len(cases); i++) {
+        for(uint_fast64_t i = 0; i < len(cases); i++) {
                 int got = collatz_steps(cases[i].x);
                 if(got != cases[i].y) {
                         printf("Failed test case: "
