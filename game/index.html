@@ -33,14 +33,23 @@
         </div>
     </div>
     <script>
-        const num1text = document.getElementById("num1text");
-        const num1text_steps = document.getElementById("num1text-steps");
-        const num2text = document.getElementById("num2text");
+        var last_random;
+        function random(max) {
+            var result;
+            do result = Math.floor(Math.random() * max);
+            while(result == last_random);
+            last_random = result;
+            return result;
+        }
 
         var num1 = random(1000);
         var num2 = random(1000);
 
         var score = 0;
+
+        const num1text = document.getElementById("num1text");
+        const num1text_steps = document.getElementById("num1text-steps");
+        const num2text = document.getElementById("num2text");
 
         async function update_text(element, num) {
             num = num + 1;
@@ -60,15 +69,6 @@
             update_text(num1text_steps, collatz_steps(num1));
             update_text(num2text, num2);
             document.getElementById("score").innerHTML = score;
-        }
-
-        var last_random;
-        function random(max) {
-            var result;
-            do result = Math.floor(Math.random() * max);
-            while(result == last_random);
-            last_random = result;
-            return result;
         }
 
         function go_next(higher) {
