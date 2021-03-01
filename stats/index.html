@@ -22,6 +22,7 @@
         <canvas id="chart2"></canvas>
     </div>
     <script>
+        collatz_test("../collatz.wasm");
         var chart1;
         var chart2;
         
@@ -72,7 +73,7 @@
         async function update_chart2() {
             const scroll_offset = window.scrollY;
             const chart2range = range(1, last_chart2value);
-            const chart2steps = await collatz_steps("../collatz.wasm", chart2range);
+            const chart2steps = await collatz_batch_steps("../collatz.wasm", 1, last_chart2value);
             if(chart2 !== undefined) chart2.destroy();
             chart2 = new Chart(document.getElementById("chart2"), {
                 type: "bar",

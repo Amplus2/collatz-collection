@@ -7,5 +7,5 @@
 #endif
 
 CCAPI int  collatz_steps(double);
-CCAPI void collatz_count(int start, int end, int *counts, int count_len);
+CCAPI void collatz_count(int start, int end, int *counts);
 CCAPI void collatz_batch_steps(int start, int end, int *steps);
