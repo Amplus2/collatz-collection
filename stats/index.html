@@ -22,10 +22,9 @@
         <canvas id="chart2"></canvas>
     </div>
     <script>
-        collatz_init("../collatz.wasm").then(() => {
         var chart1;
         var chart2;
-        
+
         const chart1slider = document.getElementById("chart1slider");
         const chart2slider = document.getElementById("chart2slider");
 
@@ -102,6 +101,7 @@
             window.scrollTo({top:scroll_offset});
         }
 
+        collatz_init("../collatz.wasm").then(() => {
         update_chart1();
         update_chart2();
 
@@ -134,7 +134,8 @@
                 chart2value.appendChild(button);
             }
         }
-        
+        });
+
         if(uses_mobile()) {
             function on_layout_update() {
                 if(!no_landscape()) document.getElementById("mobilewarning").innerHTML = "";
@@ -144,7 +145,6 @@
             on_layout_update();
             window.onresize = on_layout_update;
         }
-        });
     </script>
 </body>
 </html>
