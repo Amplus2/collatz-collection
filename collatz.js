@@ -1,11 +1,18 @@
+var collwasm;
+var collatz_steps;
+
+async function collatz_init(path) {
+    const cum = await (await fetch(path)).arrayBuffer();
+    collwasm = (await WebAssembly.instantiate(cum)).instance.exports;
+    collatz_steps = collwasm.collatz_steps;
+}
+
 function range(start, end) {
-    const result = [];
     if (end === undefined)
-        for (var i = 0; i < start; i++)
-            result.push(i);
-    else
-        for (var i = start; i <= end; i++)
-            result.push(i);
+        return range(0, start-1);
+    const result = [];
+    for (var i = start; i <= end; i++)
+        result.push(i);
     return result;
 }
 
@@ -17,49 +24,15 @@ function no_landscape() {
     return window.innerHeight > window.innerWidth;
 }
 
-function slow_wasm() {
-    return navigator.userAgent.toLowerCase().indexOf("firefox") !== -1;
-}
-
-async function get_wasm_exports(path) {
-    return (await WebAssembly.instantiate(await (await fetch(path)).arrayBuffer())).instance.exports;
-}
-
-var ran_once = false;
-async function collatz_test(exports) {
-    if (ran_once) return;
-    ran_once = true;
-    const a = new Int32Array(exports.memory);
-    exports.collatz_batch_steps(1n, 100n, a.byteOffset);
-    console.log(a);
-}
-
-async function collatz_steps(path, range) {
-    //if (slow_wasm()) return collatz_steps_js(range);
+function collatz_batch_steps(range) {
     const result = [];
-    const exports = await get_wasm_exports(path);
-    const collatz_steps = exports.collatz_steps;
-    for (var i = 0; i < range.length; i++) result.push(collatz_steps(range[i]));
+    for (var i = 0; i < range.length; i++)
+        result.push(collatz_steps(range[i]));
     return result;
 }
 
-function collatz_steps_js(range) {
-    function steps(input) {
-        if (input < 1) return -1;
-        var steps = 0;
-        while (true) {
-            if(input == 1) return steps;
-            input = input % 2 == 1 ? 3 * input + 1 : input / 2;
-            steps++;
-        }
-    }
-    const result = [];
-    for(var i = 0; i < range.length; i++) result.push(steps(range[i]));
-    return result;
-}
-
-async function collatz_amount_steps(path, range) {
-    const collatz_nums = await collatz_steps(path, range);
+function collatz_counts(range) {
+    const collatz_nums = collatz_batch_steps(range);
     collatz_nums.sort((a, b) => a - b);
     const result = new Map();
     for (var i = 0; i < collatz_nums.length; i++) {
