@@ -1,9 +1,10 @@
 #pragma once
+#include <stdint.h>
 
-#ifdef EMSCRIPTEN_KEEPALIVE
-# define CCAPI EMSCRIPTEN_KEEPALIVE extern "C"
-#else
+#ifdef __cplusplus
 # define CCAPI extern "C"
+#else
+# define CCAPI
 #endif
 
 CCAPI int collatz_steps(double);
