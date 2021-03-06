@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#define i32 uint_fast32_t
 #define i64 uint_fast64_t
 
 #ifdef __cplusplus
@@ -9,4 +10,4 @@
 # define CCAPI
 #endif
 
-CCAPI i64 collatz_steps(i64);
+CCAPI i32 collatz_steps(i32);

@@ -27,7 +27,7 @@ function no_landscape() {
 function collatz_batch_steps(range) {
     const result = [];
     for (var i = 0; i < range.length; i++)
-        result.push(collatz_steps(BigInt(range[i])));
+        result.push(collatz_steps(range[i]));
     return result;
 }
 
