@@ -10,4 +10,14 @@ wasm {
         %CPPC collatz.wasm src/wasm.cc
 }
 
+benchmark {
+        !echo 'Benchmarking em++'
+        !em++ -O3 -flto -nostdlib -Wl,--no-entry -Wl,--export-all -Wl,--lto-O3 -Isrc -o c.wasm test/benchmark.cc src/collatz.cc
+        !time wasmer c.wasm -i main 0 0
+        !echo 'Benchmarking clang++'
+        !clang++ --target=wasm32 -O3 -flto -nostdlib -Wl,--no-entry -Wl,--export-all -Wl,--lto-O3 -Isrc -o c.wasm test/benchmark.cc src/collatz.cc
+        !time wasmer c.wasm -i main 0 0
+        !rm -f c.wasm
+}
+
 all (test wasm) {}
