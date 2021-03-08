@@ -4,13 +4,12 @@
 #include <stdint.h>
 
 typedef struct {
-        int y;
-        double x;
+        i32 y;
+        i32 x;
 } test_case;
 
 const test_case cases[] = {
         // http://www.ericr.nl/wondrous/delrecs.html
-        {1662, 80867137596217},
         {1000, 1412987847},
         {987, 1341234558},
         {986, 670617279},
@@ -84,11 +83,11 @@ const test_case cases[] = {
 int main() {
         int failed = 0;
         clock_t start = clock();
-        for(uint_fast64_t i = 0; i < len(cases); i++) {
-                int got = collatz_steps(cases[i].x);
+        for(i32 i = 0; i < len(cases); i++) {
+                i32 got = collatz_steps(cases[i].x);
                 if(got != cases[i].y) {
                         printf("Failed test case: "
-                               "{x: %lf, got: %d, want: %d}\n",
+                               "{x: %d, got: %d, want: %d}\n",
                                cases[i].x, got, cases[i].y);
                         failed++;
                 }
