@@ -11,7 +11,7 @@ wasm {
 }
 
 benchmark {
-        %SET CPPFLAGS -O3 -flto -nostdlib -Wl,--no-entry -Wl,--export-all -Wl,--lto-O3 -Isrc
+        %SET CPPFLAGS -std=c++2a -O3 -flto -nostdlib -Wl,--no-entry -Wl,--export-all -Wl,--lto-O3 -Isrc
 
         !echo 'Benchmarking em++'
         %SET CPPC em++

@@ -4,6 +4,7 @@
 typedef uint_fast32_t i32;
 typedef uint_fast64_t i64;
 typedef char *str;
+typedef const char *cstr;
 
 #ifdef __cplusplus
 # define CCAPI extern "C"
