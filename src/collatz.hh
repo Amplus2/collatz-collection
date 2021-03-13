@@ -1,8 +1,9 @@
 #pragma once
 #include <stdint.h>
 
-#define i32 uint_fast32_t
-#define i64 uint_fast64_t
+typedef uint_fast32_t i32;
+typedef uint_fast64_t i64;
+typedef char *str;
 
 #ifdef __cplusplus
 # define CCAPI extern "C"
@@ -11,3 +12,4 @@
 #endif
 
 CCAPI i32 collatz_steps(i32);
+CCAPI i32 collatz_seq(i32, str);
