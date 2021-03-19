@@ -17,13 +17,12 @@
     </div>
     <script>
         var errors = false;
-        const seqText = document.getElementById('seq'); 
+        const seqText = document.getElementById('seq');
         function update_seq(value) {
             if (isNaN(value)) {
                 seqText.style.color = "#e83030";
                 seqText.innerHTML = "Eingabe ungültig";
-            }
-            else {
+            } else {
                 const n = Number.parseInt(value);
                 seqText.innerHTML = collatz_seq(n);
                 seqText.style.color = "white";
