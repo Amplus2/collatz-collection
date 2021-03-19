@@ -38,5 +38,6 @@ CCAPI i32 collatz_seq(i32 wasmjsbad, str out) {
                 sputs(out, " → ");
                 sprintd(out, i);
         }
+        sputs(out, " → …");
         return out - start;
 }
