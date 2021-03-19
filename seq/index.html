@@ -12,15 +12,19 @@
     <script src="../collatz.js"></script>
     <div class="actual-body" style="margin:50px !important;">
         <p id="mobilewarning"></p>
-        <input type="text" id="n" onkeypress="update_seq()">
+        <input type="text" id="n" oninput="update_seq(this.value)">
         <p id="seq"></p>
     </div>
     <script>
         collatz_init("../collatz.wasm");
 
-        function update_seq() {
-            const n = Number.parseInt(document.getElementById('n').value);
-            document.getElementById('seq').innerHTML = collatz_seq(n);
+        const seqText = document.getElementById('seq'); 
+        function update_seq(value) {
+            if (isNaN(value)) seqText.innerHTML = "Eingabe ungültig";
+            else {
+                const n = Number.parseInt(value);
+                seqText.innerHTML = collatz_seq(n);
+            }
         }
     </script>
 </body>
