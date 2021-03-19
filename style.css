@@ -5,6 +5,15 @@
 	background: #ffffff;
 }
 
+input {
+    background-color: #212121;
+    outline: #e8e8e8;
+    border-radius: 5px;
+    color: #e8e8e8;
+    font-size: 22pt;
+    padding: 5pt;
+}
+
 h1, h2, h3, h4, h5, h6, p, li, div, a {
     font-family: 'Inter', sans-serif;
     color: #e8e8e8;

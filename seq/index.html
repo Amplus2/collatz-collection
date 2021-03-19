@@ -5,27 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#030303">
-    <title>collatz-collection</title>
+    <title>Collatz-Folge</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <script src="../collatz.js"></script>
     <div class="actual-body" style="margin:50px !important;">
-        <p id="mobilewarning"></p>
-        <input type="text" oninput="update_seq(this.value)">
-        <p id="seq"></p>
+        <!--<p id="mobilewarning"></p>-->
+        <input type="text" id="seq-input" oninput="update_seq(this.value)" value="30">
+        <p id="seq" style="font-size: 20pt;"></p>
     </div>
     <script>
-        collatz_init("../collatz.wasm");
-
+        var errors = false;
         const seqText = document.getElementById('seq'); 
         function update_seq(value) {
-            if (isNaN(value)) seqText.innerHTML = "Eingabe ungültig";
+            if (isNaN(value)) {
+                seqText.style.color = "#e83030";
+                seqText.innerHTML = "Eingabe ungültig";
+            }
             else {
                 const n = Number.parseInt(value);
                 seqText.innerHTML = collatz_seq(n);
+                seqText.style.color = "white";
             }
         }
+        collatz_init("../collatz.wasm").then(() => update_seq(document.getElementById("seq-input").value));
     </script>
 </body>
 </html>
