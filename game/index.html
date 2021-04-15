@@ -74,9 +74,7 @@
             const prev = Number(document.getElementById("num1text-steps").innerHTML);
             const curr = collatz_steps(num2);
             if(higher && prev > curr || !higher && prev < curr) {
-                localStorage["score"] = score;
                 fail(score);
-                score = 0;
                 return;
             }
             num1 = num2;
