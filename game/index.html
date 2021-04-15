@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" id="">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,9 +65,9 @@
         }
 
         function update_all_texts() {
-            update_text(num1text, num1);
-            update_text(num1text_steps, collatz_steps(num1));
-            update_text(num2text, num2);
+            update_text(document.getElementById("num1text"), num1);
+            update_text(document.getElementById("num1text-steps"), collatz_steps(num1));
+            update_text(document.getElementById("num2text"), num2);
             document.getElementById("score").innerHTML = score;
         }
 
@@ -77,14 +77,35 @@
             const curr = collatz_steps(num2);
             if(higher && prev > curr || !higher && prev < curr) {
                 localStorage["score"] = score;
+                fail(score);
                 score = 0;
-                window.location.href = "fail/";
                 return;
             }
             num1 = num2;
             num2 = random(1000);
             score += 1;
             update_all_texts();
+        }
+
+        async function fail(score) {
+            const orig_body = document.body.innerHTML;
+            const fail_body = await (await fetch("fail.htm")).text();
+            
+            document.body.innerHTML = fail_body;
+            document.body.classList.add("center-children");
+
+            document.getElementById("again").onclick = () => {
+                document.body.innerHTML = orig_body;
+                document.body.classList.remove("center-children");
+
+                score = 0;
+                num1 = random(1000);
+                num2 = random(1000);
+
+                update_all_texts();
+            };
+
+            document.getElementById("score").innerHTML += score;
         }
 
         collatz_init("../collatz.wasm").then(update_all_texts);
