@@ -1,2 +1,4 @@
-testexe
+.testexe
+.benchmarkexe
+.bench.wasm
 .DS_Store
