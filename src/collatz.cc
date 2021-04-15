@@ -2,7 +2,7 @@
 
 namespace {
         static constexpr inline void collatz_step(i64 &i) {
-                i = i%2 == 0 ? i/2 : i*3+1;
+                i = (i % 2) * (3 * i + 1) + ((i+1) % 2) * (i / 2);
         }
         static constexpr inline void sputs(str &bfr, cstr s) {
                 while(*s) *bfr++ = *s++;
