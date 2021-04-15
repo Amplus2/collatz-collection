@@ -42,14 +42,12 @@
             return result;
         }
 
+        var score = 0;
+
         var num1 = random(1000);
         var num2 = random(1000);
 
-        var score = 0;
-
-        const num1text = document.getElementById("num1text");
-        const num1text_steps = document.getElementById("num1text-steps");
-        const num2text = document.getElementById("num2text");
+        var fail_body;
 
         async function update_text(element, num) {
             num = num + 1;
@@ -73,7 +71,7 @@
 
         function go_next(higher) {
             // Best reference to LoL, LOL
-            const prev = Number(num1text_steps.innerHTML);
+            const prev = Number(document.getElementById("num1text-steps").innerHTML);
             const curr = collatz_steps(num2);
             if(higher && prev > curr || !higher && prev < curr) {
                 localStorage["score"] = score;
@@ -89,8 +87,7 @@
 
         async function fail(score) {
             const orig_body = document.body.innerHTML;
-            const fail_body = await (await fetch("fail.htm")).text();
-            
+
             document.body.innerHTML = fail_body;
             document.body.classList.add("center-children");
 
@@ -105,10 +102,13 @@
                 update_all_texts();
             };
 
-            document.getElementById("score").innerHTML += score;
+            update_text(document.getElementById("score"), score);
         }
 
-        collatz_init("../collatz.wasm").then(update_all_texts);
+        collatz_init("../collatz.wasm").then(async () => {
+            update_all_texts();
+            fail_body = await (await fetch("fail.htm")).text();
+        });
     </script>
 </body>
 </html>
