@@ -132,10 +132,10 @@
 
                 update_all_texts();
 
-                window.onkeyup = game_keyup;
+                window.onkeydown = game_keyup;
             };
 
-            window.onkeyup = (event) => { if (event.key === " ") play_again(); }
+            window.onkeydown = (event) => { if (event.key === " ") play_again(); }
             document.getElementById("again").onclick = play_again;
 
             document.getElementById("score").innerHTML = score;
@@ -144,7 +144,7 @@
         collatz_init("../collatz.wasm").then(async () => {
             update_all_texts();
             fail_body = await (await fetch("fail.htm")).text();
-            window.onkeyup = game_keyup;
+            window.onkeydown = game_keyup;
         });
     </script>
 </body>
