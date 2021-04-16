@@ -94,13 +94,6 @@ body {
     color: #8e8e8e;
 }
 
-/*
- * WARNING: The CSS below is horrible and full of hacks I only tested in Safari.
- *          (actually not hacks, but many things probably dont make sense if you
- *           actually know css)
- * TODO:    Ludwig please clean this up.
- */
-
 .nav_box {
     display: flex;
     justify-content: space-between;
