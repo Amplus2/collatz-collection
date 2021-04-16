@@ -107,4 +107,5 @@ body {
 
 .nav_box *:hover {
     color: #00ffa1;
+    transform: scale(1.2);
 }
