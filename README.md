@@ -20,6 +20,6 @@ ends in the following scheme 4 → 2 → 1 → 4 → ...
 ### 1.4 Problem
 1.3 has not been proven.
 
-## 2 Collatz-Steps
+### 1.5 Collatz-Steps
 The length of the Collatz sequence is the number of steps required
 to get to the value 1.
