@@ -104,10 +104,6 @@ body {
 .nav_box {
     display: flex;
     justify-content: space-between;
-    white-space: nowrap;
-    list-style: none;
-    list-style-type: disc;
-    padding: none;
 }
 
 .nav_box * {
