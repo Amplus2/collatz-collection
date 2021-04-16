@@ -138,7 +138,7 @@
             window.onkeyup = (event) => { if (event.key === " ") play_again(); }
             document.getElementById("again").onclick = play_again;
 
-            update_text(document.getElementById("score"), score);
+            document.getElementById("score").innerHTML = score;
         }
 
         collatz_init("../collatz.wasm").then(async () => {
