@@ -2,3 +2,4 @@
 .benchmarkexe
 .bench.wasm
 .DS_Store
+tmp
