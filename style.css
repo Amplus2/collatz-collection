@@ -93,3 +93,26 @@ body {
 .text-button:hover {
     color: #8e8e8e;
 }
+
+/*
+ * WARNING: The CSS below is horrible and full of hacks I only tested in Safari.
+ *          (actually not hacks, but many things probably dont make sense if you
+ *           actually know css)
+ * TODO:    Ludwig please clean this up.
+ */
+
+.nav_box {
+    text-align: center;
+    display: inline-block;
+    white-space: nowrap;
+    list-style: none;
+    list-style-type: disc;
+}
+
+.nav_item {
+    font-family: 'Inter', sans-serif;
+    color: #e8e8e8;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+}
