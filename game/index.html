@@ -75,6 +75,7 @@
             const curr = collatz_steps(num2);
             if(higher && prev > curr || !higher && prev < curr) {
                 fail(score);
+                score = 0;
                 return;
             }
             num1 = num2;
@@ -83,7 +84,7 @@
             update_all_texts();
         }
 
-        async function fail(score) {
+        function fail(score) {
             const orig_body = document.body.innerHTML;
 
             document.body.innerHTML = fail_body;
@@ -93,7 +94,6 @@
                 document.body.innerHTML = orig_body;
                 document.body.classList.remove("center-children");
 
-                score = 0;
                 num1 = random(1000);
                 num2 = random(1000);
 
