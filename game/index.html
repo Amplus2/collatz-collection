@@ -34,22 +34,25 @@
     <div style="height: 100%; width: 50%; float: right; background: transparent;" class="center-children">
         <div>
             <h1 onclick="go_next(true)" style="margin: 0; text-align: center;">
-                <span style="text-decoration: none;" class="text-button">▲<br/>mehr</span>
+                <span style="text-decoration: none;" id="higher" class="text-button">▲<br/>mehr</span>
             </h1>
             <br/>
             <h1 style="font-size: 60pt; margin: 0; text-align: center;" id="num2text"></h1>
             <br/>
             <h1 onclick="go_next(false)" style="margin: 0; text-align: center;">
-                <span style="text-decoration: none;" class="text-button">weniger<br/>▼</span>
+                <span style="text-decoration: none;" id="lower" class="text-button">weniger<br/>▼</span>
             </h1>
         </div>
     </div>
     <script>
+        const ACCENT_COLOR = "#00ffa1";
+
+
         var last_random;
         function random(max) {
             var result;
             do result = Math.floor(Math.random() * max);
-            while(result == last_random);
+            while(result === last_random);
             last_random = result;
             return result;
         }
@@ -88,7 +91,7 @@
             if(higher && prev > curr || !higher && prev < curr) {
                 fail(score);
                 score = 0;
-                return;
+                return true;
             }
             num1 = num2;
             num2 = random(1000);
@@ -96,13 +99,31 @@
             update_all_texts();
         }
 
+        function textbtn_blink(btn) {
+            if (btn === undefined) return;
+            btn.style.color = ACCENT_COLOR;
+            setTimeout(() => btn.style.color = "", 200);
+        }
+
+        function game_keyup(event) {
+            if (event.key === "ArrowUp") {
+                textbtn_blink(document.getElementById("higher"));
+                go_next(true);
+            } else if (event.key === "ArrowDown") {
+                textbtn_blink(document.getElementById("lower"));
+                go_next(false);
+            }
+        }
+
         function fail(score) {
+            document.getElementById("higher").style.color = ""
+            document.getElementById("lower").style.color = ""
             const orig_body = document.body.innerHTML;
 
             document.body.innerHTML = fail_body;
             document.body.classList.add("center-children");
 
-            document.getElementById("again").onclick = () => {
+            const play_again = () => {
                 document.body.innerHTML = orig_body;
                 document.body.classList.remove("center-children");
 
@@ -110,7 +131,12 @@
                 num2 = random(1000);
 
                 update_all_texts();
+
+                window.onkeyup = game_keyup;
             };
+
+            window.onkeyup = (event) => { if (event.key === " ") play_again(); }
+            document.getElementById("again").onclick = play_again;
 
             update_text(document.getElementById("score"), score);
         }
@@ -118,6 +144,7 @@
         collatz_init("../collatz.wasm").then(async () => {
             update_all_texts();
             fail_body = await (await fetch("fail.htm")).text();
+            window.onkeyup = game_keyup;
         });
     </script>
 </body>
