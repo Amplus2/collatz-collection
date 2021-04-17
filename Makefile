@@ -7,7 +7,7 @@ CPPFLAGS += -Isrc
 WASMFLAGS ?= $(CPPFLAGS) --target=wasm32 -nostdlib -s \
 	     -Wl,--lto-O3 -Wl,--no-entry -Wl,--export-all
 
-all: test benchmark wasm
+all: logo test benchmark wasm
 
 test:
 	$(CPPC) $(CPPFLAGS) -o .testexe src/collatz.cc test/steps_test.cc
