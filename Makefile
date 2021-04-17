@@ -27,11 +27,4 @@ wasm:
 RESOLUTIONS = 32 64 96 128 160 192 224 256 288 320 352 384 416 448 480 512
 
 logo:
-#	should be simplified
-	mkdir -p tmp
-	for i in $(RESOLUTIONS) ; do inkscape -w $$i -h $$i logo.svg -o tmp/$$i.png ; \
-	TMP="$$TMP tmp/$$i.png" ; done ; echo "IMAGES:$$TMP" ; convert $$TMP logo.ico ; \
-	for i in $(RESOLUTIONS) ; do rm tmp/$$i.png ; done ; \
-	printf "\n\nsizes=\"" ; \
-	for i in $(RESOLUTIONS) ; do printf $$i ; printf x ;  printf "$$i " ; \
-	done ; echo -e "\b\""
+	@bash .logogen $(RESOLUTIONS)
