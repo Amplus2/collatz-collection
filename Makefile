@@ -37,4 +37,4 @@ logo:
 	for i in $(RESOLUTIONS) ; do \
 		printf "$${i}x$$i " ; \
 	done ; \
-	echo -e "\b\""
+	echo \"
