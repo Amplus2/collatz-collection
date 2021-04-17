@@ -113,3 +113,11 @@ body {
     color: #00ffa1;
     transform: scale(1.2);
 }
+
+.nav_box h1 {
+    margin: 0;
+}
+
+.nav_logo {
+    margin-bottom: 0;
+}
