@@ -20,7 +20,7 @@ benchmark:
 	@time ./.benchmarkexe
 
 wasm:
-	$(WASMC) $(WASMFLAGS) -o collatz.wasm src/collatz.cc
+	$(WASMC) $(WASMFLAGS) -o web/collatz.wasm src/collatz.cc
 
 .PHONY: all test benchmark wasm
 
@@ -32,7 +32,7 @@ logo:
 		inkscape -w $$i -h $$i logo.svg -o tmp/$$i.png ; \
 		TMP="$$TMP tmp/$$i.png" ; \
 	done ; \
-	convert $$TMP logo.ico ; \
+	convert $$TMP web/logo.ico ; \
 	printf "\n\nsizes=\"" ; \
 	for i in $(RESOLUTIONS) ; do \
 		printf "$${i}x$$i " ; \

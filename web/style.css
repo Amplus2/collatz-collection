@@ -54,23 +54,23 @@ body {
     padding-right: 10px;
     width: 40px;
     height: 40px;
-    transition-duration: 150ms;
+    transition-duration: 250ms;
 }
 
 .sub-header:hover .logo {
     width: 50px;
     height: 50px;
-    filter: grayscale(100%);
+    filter: invert(100%);
 }
 
 .sub-header h1 {
     color: #e8e8e8;
     font-size: 24pt;
-    transition-duration: 150ms;
+    transition-duration: 250ms;
 }
 
 .sub-header:hover h1 {
-    color: #838383;
+    color: #00ffa1;
     font-size: 27pt;
 }
 
