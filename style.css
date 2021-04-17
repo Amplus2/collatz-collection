@@ -43,6 +43,37 @@ body {
     font-size: 25pt;
 }
 
+.sub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sub-header .logo {
+    padding-top: 5px;
+    padding-right: 10px;
+    width: 40px;
+    height: 40px;
+    transition-duration: 150ms;
+}
+
+.sub-header:hover .logo {
+    width: 50px;
+    height: 50px;
+    filter: grayscale(100%);
+}
+
+.sub-header h1 {
+    color: #e8e8e8;
+    font-size: 24pt;
+    transition-duration: 150ms;
+}
+
+.sub-header:hover h1 {
+    color: #838383;
+    font-size: 27pt;
+}
+
 .actual-body {
     margin: 50px;
 }
@@ -114,10 +145,4 @@ body {
     transform: scale(1.2);
 }
 
-.nav_box h1 {
-    margin: 0;
-}
 
-.nav_logo {
-    margin-bottom: 0;
-}
