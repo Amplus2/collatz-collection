@@ -24,7 +24,6 @@ wasm:
 
 .PHONY: all test benchmark wasm
 
-
 RESOLUTIONS = 32 64 96 128 160 192 224 256 288 320 352 384 416 448 480 512
 
 logo:
