@@ -3,3 +3,4 @@
 .bench.wasm
 .DS_Store
 tmp
+*.stl
