@@ -21,7 +21,8 @@
         href="../logo.ico">
 </head>
 <body>
-    <script src="../collatz.js"></script>
+  <script src="../collatz.js"></script>
+  
     <header class="center-children" style="position: absolute; left: 0; right: 0;">
         <h1 style="font-size: 40pt; text-align: center;">
             score<br/><span id="score" style="color: #00ffa1;">0</span>
@@ -46,10 +47,14 @@
             </h1>
         </div>
     </div>
+
+    <div style="position: absolute; padding: 10px; font-size: 22pt; cursor: pointer;" onclick="back();">⯇ zurück</div>
+
     <script>
+        const back = () => history.back();
+        
         const ACCENT_COLOR = "#00ffa1";
-
-
+      
         var last_random;
         function random(max) {
             var result;
