@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from gpiozero import Button
 from time import sleep
-from keyboard import Controller, Key
+from pynput.keyboard import Controller, Key
 
 kbd = Controller()
 
