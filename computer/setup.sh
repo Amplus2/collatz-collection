@@ -16,10 +16,14 @@ cat > .xinitrc <<EOF
 
 python3 /home/pi/collatz-collection/computer/keyboard_driver.py &
 
+xrandr="$(xrandr | grep '*' | head -n 1 | awk '{ print $1 }')"
+
+wid="$(echo "$xrandr" | cut -dx -f1)"
+hei="$(echo "$xrandr" | cut -dx -f2)"
+
 exec chromium https://amplus2.github.io/collatz-collection/ --kiosk \
-              --start-fullscreen --fast --noerrdialogs --fast-start \
-              --disable-infobars --disable-features=TranslateUI \
-              --disable-translate --window-size=1920,1080
+    --start-fullscreen --fast --noerrdialogs --fast-start --disable-infobars \
+    --disable-features=TranslateUI --disable-translate --window-size=$wid,$hei
 EOF
 
 cat > .profile <<EOF
