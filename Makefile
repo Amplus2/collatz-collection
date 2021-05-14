@@ -29,10 +29,13 @@ RESOLUTIONS = 32 64 96 128 160 192 224 256 288 320 352 384 416 448 480 512
 logo:
 	@mkdir -p tmp
 	for i in $(RESOLUTIONS) ; do \
-		inkscape -w $$i -h $$i logo.svg -o tmp/$$i.png ; \
-		TMP="$$TMP tmp/$$i.png" ; \
+		inkscape -w $$i -h $$i logo.svg -o tmp/logo-$$i.png ; \
+		LOGO_TMP="$$LOGO_TMP tmp/logo-$$i.png" ; \
+		convert kurs_logo.png -resize $$ix$$i tmp/klogo-$$i.png ; \
+		KLOGO_TMP="$$KLOGO_TMP tmp/klogo-$$i.png" ; \
 	done ; \
-	convert $$TMP logo.ico ; \
+	convert $$LOGO_TMP logo.ico ; \
+	convert $$KLOGO_TMP kurs_logo.ico ; \
 	printf "\n\nsizes=\"" ; \
 	for i in $(RESOLUTIONS) ; do \
 		printf "$${i}x$$i " ; \
