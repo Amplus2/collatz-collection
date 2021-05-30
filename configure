@@ -2,7 +2,10 @@
 from shutil import copyfile as cp
 
 resolutions = [32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 480, 512]
-logos = {'logo': 'svg', 'kurs_logo': 'svg'}
+formats = {
+    'svg': lambda r: 'inkscape -w %d -h %d $< -o tmp/$*-%d.png 2>/dev/null' % (r, r, r),
+    'png': lambda r: 'convert $< -resize %dx%d tmp/$*-%d.png' % (r, r, r),
+}
 
 cp('Makefile.in', 'Makefile')
 f = open('Makefile', 'a')
@@ -10,17 +13,11 @@ f = open('Makefile', 'a')
 def cmd(c):
     f.write('\t%s\n' % c)
 
-for l,e in logos.items():
-    f.write('\n%s.ico: %s.%s\n' % (l, l, e))
+for e,c in formats.items():
+    f.write('\n%%.ico: %%.%s\n' % e)
     cmd('@mkdir -p tmp')
     for r in resolutions:
-        if e == 'svg':
-            cmd('inkscape -w %d -h %d %s.%s -o tmp/%s-%d.png' % (r, r, l, e, l, r))
-        elif e == 'png':
-            cmd('convert %s.%s -resize %dx%d tmp/%s-%d.png' % (l, e, r, r, l, r))
-        else:
-            print('unknown extension: %s', e)
-            exit(1)
-    cmd('convert tmp/%s-*.png %s.ico' % (l, l))
+        cmd(c(r))
+    cmd('convert tmp/$*-*.png $@')
 
 f.close()
