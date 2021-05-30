@@ -1,5 +1,5 @@
 CXX ?= c++
-WASMC ?= $(CXX)
+WASMC ?= clang++
 WASMRUNNER ?= wasmer
 CXXFLAGS ?= -Wall -Wextra -pedantic -O3 -flto -std=c++17
 

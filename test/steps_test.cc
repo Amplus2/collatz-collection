@@ -1,14 +1,11 @@
+#include <collatz.cc>
+#include <stdint.h>
 #include <stdio.h>
 #include <time.h>
-#include <collatz.hh>
-#include <stdint.h>
 
-typedef struct {
-        i32 y;
-        i32 x;
-} test_case;
-
-const test_case cases[] = {
+const struct {
+        i32 y, x;
+} cases[] = {
         // http://www.ericr.nl/wondrous/delrecs.html
         {1000, 1412987847},
         {987, 1341234558},
@@ -78,26 +75,20 @@ const test_case cases[] = {
         {7, 3},
         {1, 2},
 };
-#define len(a) sizeof(a) / sizeof(a[0])
 
 int main() {
-        int failed = 0;
-        clock_t start = clock();
-        for(i32 i = 0; i < len(cases); i++) {
-                i32 got = collatz_steps(cases[i].x);
-                if(got != cases[i].y) {
-                        printf("Failed test case: "
-                               "{x: %d, got: %d, want: %d}\n",
-                               cases[i].x, got, cases[i].y);
+        i32 failed = 0;
+        for(auto test_case : cases) {
+                i32 x = test_case.x;
+                i32 got = collatz_steps(x);
+                i32 want = test_case.y;
+                if(got != want) {
+                        printf("Failed test case: {x: %d, got: %d, want: %d}\n",
+                               x, got, want);
                         failed++;
                 }
         }
-        clock_t end = clock();
-        clock_t dt = end - start;
 
-        if(failed) printf("%d/%lu tests failed.\n", failed, len(cases));
-        else       printf("All tests passed within %lu ticks. "
-                          "(approx %fms)\n", dt, dt * 1000.0F / CLOCKS_PER_SEC);
-
+        printf(failed ? "%u tests failed.\n" : "All tests passed.\n", failed);
         return failed;
 }
