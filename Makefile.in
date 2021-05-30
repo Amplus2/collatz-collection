@@ -2,26 +2,24 @@ CXX ?= c++
 WASMC ?= clang++
 WASMRUNNER ?= wasmer
 CXXFLAGS ?= -Wall -Wextra -pedantic -O3 -flto -std=c++17
-
-CXXFLAGS += -Isrc
 WASMFLAGS ?= $(CXXFLAGS) --target=wasm32 -nostdlib -s -Wl,--lto-O3 -Wl,--no-entry -Wl,--export-all
 
 all: collatz.wasm logo.ico kurs_logo.ico
 
 test:
 	@mkdir -p tmp
-	$(CXX) $(CXXFLAGS) -o tmp/testexe test/steps_test.cc
+	$(CXX) $(CXXFLAGS) -o tmp/testexe test.cc
 	tmp/testexe
 
 benchmark:
 	@mkdir -p tmp
-	$(WASMC) $(WASMFLAGS) -o tmp/bench.wasm test/benchmark.cc
-	$(CXX) $(CXXFLAGS) -o tmp/benchmarkexe test/benchmark.cc
+	$(WASMC) $(WASMFLAGS) benchmark.cc -o tmp/bench.wasm
+	$(CXX) $(CXXFLAGS) benchmark.cc -o tmp/benchmarkexe
 	time sh -c '$(WASMRUNNER) tmp/bench.wasm -i main 0 0 >/dev/null'
 	time tmp/benchmarkexe
 
-collatz.wasm: src/collatz.cc
-	$(WASMC) $(WASMFLAGS) -o collatz.wasm src/collatz.cc
+collatz.wasm: collatz.cc
+	$(WASMC) $(WASMFLAGS) collatz.cc -o collatz.wasm
 
 clean:
 	rm -rf collatz.wasm *.ico tmp/
