@@ -24,7 +24,7 @@ collatz.wasm: collatz.cc
 clean:
 	rm -rf collatz.wasm *.ico tmp/
 
-.PHONY: test clean all
+.PHONY: all benchmark clean test
 
 %.ico: %.svg
 	@mkdir -p tmp
@@ -44,24 +44,4 @@ clean:
 	inkscape -w 448 -h 448 $< -o tmp/$*-448.png 2>/dev/null
 	inkscape -w 480 -h 480 $< -o tmp/$*-480.png 2>/dev/null
 	inkscape -w 512 -h 512 $< -o tmp/$*-512.png 2>/dev/null
-	convert tmp/$*-*.png $@
-
-%.ico: %.png
-	@mkdir -p tmp
-	convert $< -resize 32x32 tmp/$*-32.png
-	convert $< -resize 64x64 tmp/$*-64.png
-	convert $< -resize 96x96 tmp/$*-96.png
-	convert $< -resize 128x128 tmp/$*-128.png
-	convert $< -resize 160x160 tmp/$*-160.png
-	convert $< -resize 192x192 tmp/$*-192.png
-	convert $< -resize 224x224 tmp/$*-224.png
-	convert $< -resize 256x256 tmp/$*-256.png
-	convert $< -resize 288x288 tmp/$*-288.png
-	convert $< -resize 320x320 tmp/$*-320.png
-	convert $< -resize 352x352 tmp/$*-352.png
-	convert $< -resize 384x384 tmp/$*-384.png
-	convert $< -resize 416x416 tmp/$*-416.png
-	convert $< -resize 448x448 tmp/$*-448.png
-	convert $< -resize 480x480 tmp/$*-480.png
-	convert $< -resize 512x512 tmp/$*-512.png
 	convert tmp/$*-*.png $@

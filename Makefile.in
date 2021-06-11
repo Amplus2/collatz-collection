@@ -24,4 +24,4 @@ collatz.wasm: collatz.cc
 clean:
 	rm -rf collatz.wasm *.ico tmp/
 
-.PHONY: test clean all
+.PHONY: all benchmark clean test
