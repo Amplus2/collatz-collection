@@ -18,8 +18,8 @@ benchmark:
 	time sh -c '$(WASMRUNNER) tmp/bench.wasm -i main 0 0 >/dev/null'
 	time tmp/benchmarkexe
 
-collatz.wasm: collatz.cc
-	$(WASMC) $(WASMFLAGS) collatz.cc -o collatz.wasm
+%.wasm: %.cc
+	$(WASMC) $(WASMFLAGS) $< -o $@
 
 clean:
 	rm -rf collatz.wasm *.ico tmp/
