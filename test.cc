@@ -1,4 +1,4 @@
-#include <collatz.cc>
+#include "collatz.cc"
 #include <stdint.h>
 #include <stdio.h>
 #include <time.h>

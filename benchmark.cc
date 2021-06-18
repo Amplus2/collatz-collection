@@ -1,4 +1,4 @@
-#include <collatz.cc>
+#include "collatz.cc"
 
 int main() {
         volatile i32 j;
