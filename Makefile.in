@@ -4,7 +4,7 @@ WASMRUNNER ?= wasmer
 CXXFLAGS ?= -Wall -Wextra -pedantic -O3 -flto -std=c++17
 WASMFLAGS ?= $(CXXFLAGS) --target=wasm32 -nostdlib -s -Wl,--lto-O3 -Wl,--no-entry -Wl,--export-all
 
-all: collatz.wasm logo.ico kurs_logo.ico
+all: collatz.wasm logo.ico kurs_logo.ico qr.png
 
 test:
 	@mkdir -p tmp
@@ -23,5 +23,8 @@ benchmark:
 
 clean:
 	rm -rf collatz.wasm *.ico tmp/
+
+qr.png:
+	qrencode -o qr.png "https://amplus2.github.io/collatz-collection/"
 
 .PHONY: all benchmark clean test
