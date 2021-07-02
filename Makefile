@@ -4,7 +4,7 @@ WASMRUNNER ?= wasmer
 CXXFLAGS ?= -Wall -Wextra -pedantic -O3 -flto -std=c++17
 WASMFLAGS ?= $(CXXFLAGS) --target=wasm32 -nostdlib -s -Wl,--lto-O3 -Wl,--no-entry -Wl,--export-all
 
-all: collatz.wasm logo.ico kurs_logo.ico qr.png
+all: collatz.wasm logo.ico kurs_logo.ico qr.png graph/graph.svg
 
 test:
 	@mkdir -p tmp
@@ -26,6 +26,15 @@ clean:
 
 qr.png:
 	qrencode -o qr.png "https://amplus2.github.io/collatz-collection/"
+
+graph/pubspec.lock: graph/pubspec.yaml
+	cd graph && dart pub get
+
+graph/graph.dot: graph/main.dart graph/pubspec.lock
+	dart run graph/main.dart > graph/graph.dot
+
+graph/graph.svg: graph/graph.dot
+	dot -Tsvg -o graph/graph.svg graph/graph.dot
 
 .PHONY: all benchmark clean test
 

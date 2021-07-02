@@ -1,0 +1,4 @@
+.dart_tool/
+.packages
+graph.dot
+pubspec.lock
