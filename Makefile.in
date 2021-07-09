@@ -4,7 +4,9 @@ WASMRUNNER ?= wasmer
 CXXFLAGS ?= -Wall -Wextra -pedantic -O3 -flto -std=c++17
 WASMFLAGS ?= $(CXXFLAGS) --target=wasm32 -nostdlib -s -Wl,--lto-O3 -Wl,--no-entry -Wl,--export-all
 
-all: collatz.wasm logo.ico kurs_logo.ico qr.png graph/graph.svg
+HTMLS = index.html stats/index.html seq/index.html
+
+all: collatz.wasm logo.ico kurs_logo.ico qr.png graph/graph.svg $(HTMLS)
 
 test:
 	@mkdir -p tmp
@@ -35,5 +37,14 @@ graph/graph.dot: graph/main.dart graph/pubspec.lock
 
 graph/graph.svg: graph/graph.dot
 	dot -Tsvg -o graph/graph.svg graph/graph.dot
+
+index.html: tools/tmplt raw/index.html
+	tools/tmplt "" collatz-collection < raw/index.html > index.html
+
+stats/index.html: tools/tmplt raw/stats.html
+	tools/tmplt ../ "Statistiken zur Collatz-Folge" < raw/stats.html > stats/index.html
+
+seq/index.html: tools/tmplt raw/seq.html
+	tools/tmplt ../ Collatz-Folge < raw/seq.html > seq/index.html
 
 .PHONY: all benchmark clean test
