@@ -8,8 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: rm -rf computer/ raw/ tools/ tmp/ .github/ .git/ README.md Makefile Makefile.in *.cc configure LICENSE
-      - run: cd ..
-      - run: zip -9 gpzip.zip *
       - uses: actions/upload-artifact@v2
         with:
-          path: gpzip.zip
+          name: gpzip.zip
+          path: .
