@@ -41,7 +41,6 @@ echo "<!DOCTYPE html>
             <h3><a href=\"$1seq/\">Collatz-Folgen</a></h3>
             <h3><a href=\"$1graph/\">Graph</a></h3>
         </div>
-    <img src=\"$1qr.png\" style=\"height: 85px; width: 85px;\">
     </header>
 
     <img src=\"$1kurs_logo.ico\" style=\"height: 85px; width: 85px; top: 15px; right: 15px; position: absolute;\">
