@@ -23,7 +23,7 @@ benchmark:
 %.wasm: %.cc
 	$(WASMC) $(WASMFLAGS) $< -o $@
 
-dist: all
+dist:
 	rm -rf computer/ raw/ tools/ tmp/ .github/ .git/ README.md Makefile Makefile.in *.cc configure LICENSE .gitignore
 
 clean:
