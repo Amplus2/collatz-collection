@@ -1,8 +1,8 @@
 CXX ?= c++
-WASMC ?= clang++
+WASMC ?= clang++ --target=wasm32
 WASMRUNNER ?= wasmer
 CXXFLAGS ?= -Wall -Wextra -pedantic -O3 -flto -std=c++17
-WASMFLAGS ?= $(CXXFLAGS) --target=wasm32 -nostdlib -s -Wl,--lto-O3 -Wl,--no-entry -Wl,--export-all
+WASMFLAGS ?= $(CXXFLAGS) -nostdlib -s -Wl,--lto-O3 -Wl,--no-entry -Wl,--export-all
 
 HTMLS = index.html graph/index.html stats/index.html seq/index.html
 
@@ -22,6 +22,9 @@ benchmark:
 
 %.wasm: %.cc
 	$(WASMC) $(WASMFLAGS) $< -o $@
+
+dist: all
+	rm -rf computer/ raw/ tools/ tmp/ .github/ .git/ README.md Makefile Makefile.in *.cc configure LICENSE .gitignore
 
 clean:
 	rm -rf collatz.wasm *.ico qr.png tmp/ graph/graph.svg $(HTMLS)

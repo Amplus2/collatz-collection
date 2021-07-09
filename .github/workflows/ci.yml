@@ -3,11 +3,18 @@ name: CI
 on: push
 
 jobs:
-  gpzip:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: rm -rf computer/ raw/ tools/ tmp/ .github/ .git/ README.md Makefile Makefile.in *.cc configure LICENSE .gitignore
+      - run: ./configure
+      - run: make -j$(nproc) test
+  gpzip:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - run: make dist
       - uses: actions/upload-artifact@v2
         with:
           name: gpzip
