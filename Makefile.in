@@ -24,19 +24,19 @@ benchmark:
 	$(WASMC) $(WASMFLAGS) $< -o $@
 
 clean:
-	rm -rf collatz.wasm *.ico tmp/
+	rm -rf collatz.wasm *.ico qr.png tmp/ graph/graph.svg $(HTMLS)
 
 qr.png:
 	qrencode -o qr.png "https://www.gymnasium-pegnitz.de/unterricht/faecher/mathematik/SpielMalMathe/"
 
-graph/pubspec.lock: graph/pubspec.yaml
-	cd graph && dart pub get
+tools/pubspec.lock: tools/pubspec.yaml
+	cd tools && dart pub get
 
-graph/graph.dot: graph/main.dart graph/pubspec.lock
-	dart run graph/main.dart > graph/graph.dot
+tmp/graph.dot: tools/graph.dart tools/pubspec.lock
+	dart run tools/graph.dart > tmp/graph.dot
 
-graph/graph.svg: graph/graph.dot
-	dot -Tsvg -o graph/graph.svg graph/graph.dot
+graph/graph.svg: tmp/graph.dot
+	dot -Tsvg -o graph/graph.svg tmp/graph.dot
 
 index.html: tools/tmplt raw/index.html
 	tools/tmplt "" collatz-collection < raw/index.html > index.html
@@ -46,5 +46,8 @@ stats/index.html: tools/tmplt raw/stats.html
 
 seq/index.html: tools/tmplt raw/seq.html
 	tools/tmplt ../ Collatz-Folge < raw/seq.html > seq/index.html
+
+graph/index.html: tools/tmplt raw/graph.html
+	tools/tmplt ../ Collatz-Graph < raw/graph.html > graph/index.html
 
 .PHONY: all benchmark clean test
