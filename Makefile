@@ -25,7 +25,7 @@ clean:
 	rm -rf collatz.wasm *.ico tmp/
 
 qr.png:
-	qrencode -o qr.png "https://amplus2.github.io/collatz-collection/"
+	qrencode -o qr.png "https://www.gymnasium-pegnitz.de/unterricht/faecher/mathematik/SpielMalMathe/"
 
 graph/pubspec.lock: graph/pubspec.yaml
 	cd graph && dart pub get

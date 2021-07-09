@@ -2,12 +2,12 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:400');
 
 ::selection {
-	color: #000000;
-	background: #ffffff;
+	color: black;
+	background: white;
 }
 
 input {
-    background-color: #212121;
+    background-color: #161616;
     outline: #e8e8e8;
     border-radius: 5px;
     color: #e8e8e8;
@@ -15,23 +15,20 @@ input {
     padding: 5pt;
 }
 
-h1, h2, h3, h4, h5, h6, p, li, div, a {
+html {
     font-family: 'Inter', sans-serif;
     color: #e8e8e8;
-}
-
-html {
     height: 100%;
 }
 
 body {
     margin: 0;
     height: 100%;
-    background-color: #030303;
+    background-color: black;
 }
 
 .header {
-    background-color: #212121;
+    background-color: #161616;
 }
 
 .header .hoverable {
@@ -39,7 +36,6 @@ body {
 }
 
 .header .hoverable:hover {
-    color: #838383;
     font-size: 25pt;
 }
 
@@ -87,7 +83,7 @@ body {
     appearance: none;
     width: 100%;
     height: 15px;
-    background: #ffffff;
+    background: white;
     outline: none;
     border-radius: 5px;
     opacity: 0.9;
@@ -121,11 +117,7 @@ body {
     transition-duration: 300ms;
 }
 
-.text-button.hover {
-    color: #8e8e8e;
-}
-
-.text-button:hover {
+.text-button.hover, .text-button:hover {
     color: #8e8e8e;
 }
 
@@ -144,5 +136,3 @@ body {
     color: #00ffa1;
     transform: scale(1.2);
 }
-
-
