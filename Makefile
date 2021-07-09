@@ -4,7 +4,7 @@ WASMRUNNER ?= wasmer
 CXXFLAGS ?= -Wall -Wextra -pedantic -O3 -flto -std=c++17
 WASMFLAGS ?= $(CXXFLAGS) --target=wasm32 -nostdlib -s -Wl,--lto-O3 -Wl,--no-entry -Wl,--export-all
 
-HTMLS = index.html stats/index.html seq/index.html
+HTMLS = index.html graph/index.html stats/index.html seq/index.html
 
 all: collatz.wasm logo.ico kurs_logo.ico qr.png graph/graph.svg $(HTMLS)
 
