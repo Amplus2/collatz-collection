@@ -38,6 +38,7 @@ For a full rebuild of collatz-collection you will need the following:
 * [`imagemagick`](https://imagemagick.org)
 * [`graphviz`](https://graphviz.org)
 * [`clang++`](https://clang.llvm.org)
+* [`lld`](https://lld.llvm.org) (for `wasm-ld`)
 * Optionally [`wasmer`](https://wasmer.io) for testing
 
 ### Building
