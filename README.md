@@ -29,7 +29,9 @@ cc is built using completely static HTML, CSS and JS, as well as some C++ that
 is compiled to WebAssembly for performance.
 
 ### Dependencies
-For a full rebuild of collatz-collection you will need the following:
+
+For a full rebuild of collatz-collection you will need the following software:
+
 * A POSIX system (`sh`, `mkdir`, `rm`, `time`, ...)
 * [`make`](https://www.gnu.org/software/make/)
 * [`python3`](https://www.python.org)
@@ -41,6 +43,11 @@ For a full rebuild of collatz-collection you will need the following:
 * [`clang++`](https://clang.llvm.org)
 * [`lld`](https://lld.llvm.org) (for `wasm-ld`)
 * Optionally [`wasmer`](https://wasmer.io) for testing
+
+and the following fonts:
+
+* [Inter](https://fonts.google.com/specimen/Inter)
+* [Manjari](https://fonts.google.com/specimen/Manjari)
 
 ### Building
 1. Generate the Makefile with `./configure`
