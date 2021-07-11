@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 from shutil import copyfile as cp
+from subprocess import run as system
 
 resolutions = [32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 480, 512]
+inkscape0 = system(['inkscape', '--version'], capture_output=True).stdout.startswith(b'Inkscape 0.')
 formats = {
-    'svg': lambda r: f'inkscape -w {r} -h {r} $< -o tmp/$*-{r}.png 2>/dev/null',
+    'svg': lambda r: f'inkscape -w {r} -h {r} $< {"-e" if inkscape0 else "-o"} tmp/$*-{r}.png 2>/dev/null',
     #'png': lambda r: f'convert $< -resize {r}x{r} tmp/$*-{r}.png',
 }
 
