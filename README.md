@@ -37,6 +37,7 @@ For a full rebuild of collatz-collection you will need the following:
 * [`inkscape`](https://inkscape.org)
 * [`imagemagick`](https://imagemagick.org)
 * [`graphviz`](https://graphviz.org)
+* [`qrencode`](https://fukuchi.org/works/qrencode/)
 * [`clang++`](https://clang.llvm.org)
 * [`lld`](https://lld.llvm.org) (for `wasm-ld`)
 * Optionally [`wasmer`](https://wasmer.io) for testing
