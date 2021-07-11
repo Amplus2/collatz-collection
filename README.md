@@ -30,7 +30,7 @@ is compiled to WebAssembly for performance.
 
 ### Dependencies
 For a full rebuild of collatz-collection you will need the following:
-* A POSIX system (`sh`, `mkdir`, `rm`, `time`)
+* A POSIX system (`sh`, `mkdir`, `rm`, `time`, ...)
 * [`make`](https://www.gnu.org/software/make/)
 * [`python3`](https://www.python.org)
 * [`dart`](https://dart.dev)
@@ -38,7 +38,7 @@ For a full rebuild of collatz-collection you will need the following:
 * [`imagemagick`](https://imagemagick.org)
 * [`graphviz`](https://graphviz.org)
 * [`clang++`](https://clang.llvm.org)
-* optionally [`wasmer`](https://wasmer.io) for testing
+* Optionally [`wasmer`](https://wasmer.io) for testing
 
 ### Building
 1. Generate the Makefile with `./configure`
